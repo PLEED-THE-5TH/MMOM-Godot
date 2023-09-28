@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://c2i1ufdjor4ks"]
+[gd_scene load_steps=13 format=3 uid="uid://c2i1ufdjor4ks"]
 
 [ext_resource type="Texture2D" uid="uid://chbqvnk34gr0o" path="res://Assets/Textures/KennyTextures/Vector/texture_02.svg" id="1_4a100"]
 [ext_resource type="Texture2D" uid="uid://beyuo2ywq643g" path="res://Assets/Textures/KennyTextures/PNG/Orange/texture_09.png" id="2_hfwda"]
 [ext_resource type="Texture2D" uid="uid://b1hvw1rsxnyn" path="res://Assets/Textures/KennyTextures/PNG/Green/texture_09.png" id="3_0ccsb"]
 [ext_resource type="Texture2D" uid="uid://d12mu6vaup3rk" path="res://Assets/Textures/KennyTextures/PNG/Purple/texture_09.png" id="4_opup5"]
 [ext_resource type="PackedScene" uid="uid://b8ds1i6ivs72m" path="res://Scenes/Player.tscn" id="5_rrdk8"]
+[ext_resource type="PackedScene" uid="uid://d31jlldr5f2ur" path="res://Inventory/Inventory.tscn" id="6_4iapt"]
 
 [sub_resource type="Environment" id="Environment_4s7r7"]
 sdfgi_enabled = true
@@ -65,3 +66,20 @@ use_collision = true
 [node name="Player" parent="." instance=ExtResource("5_rrdk8")]
 sens_horizontal = 0.2
 sens_vertical = 0.2
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="InventoryInterface" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PlayerInventory" parent="UI/InventoryInterface" instance=ExtResource("6_4iapt")]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 50.0
+offset_bottom = 50.0
