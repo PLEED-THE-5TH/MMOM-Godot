@@ -9,7 +9,7 @@
 [sub_resource type="Environment" id="Environment_4s7r7"]
 sdfgi_enabled = true
 fog_enabled = true
-fog_density = 0.001
+fog_density = 0.005
 
 [sub_resource type="CameraAttributesPhysical" id="CameraAttributesPhysical_frsjj"]
 
