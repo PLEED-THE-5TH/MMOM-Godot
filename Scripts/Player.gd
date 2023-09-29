@@ -3,6 +3,7 @@ extends CharacterBody3D
 @onready var camera_mount = $Camera_Mount
 @onready var animation_player = $Visuals/mixamo_base/AnimationPlayer
 @onready var visuals = $Visuals
+@onready var interact_ray = $Camera_Mount/Camera3D/InteractRay
 
 var SPEED = 2
 const JUMP_VELOCITY = 4.5
@@ -31,6 +32,9 @@ func _input(event):
 	
 	if Input.is_action_just_pressed("inventory"):
 		toggle_inventory.emit()
+		
+	if Input.is_action_just_pressed("interact"):
+		interact()
 
 func _physics_process(delta):
 	if Input.is_action_pressed("run"):
@@ -71,3 +75,7 @@ func _physics_process(delta):
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 
 	move_and_slide()
+
+func interact() -> void:
+	if interact_ray.is_colliding():
+		interact_ray.get_collider().player_interact()

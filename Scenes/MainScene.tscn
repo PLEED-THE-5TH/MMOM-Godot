@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://c2i1ufdjor4ks"]
+[gd_scene load_steps=26 format=3 uid="uid://c2i1ufdjor4ks"]
 
 [ext_resource type="Texture2D" uid="uid://chbqvnk34gr0o" path="res://Assets/Textures/KennyTextures/Vector/texture_02.svg" id="1_4a100"]
 [ext_resource type="Script" path="res://Scenes/MainScene.gd" id="1_pdp88"]
@@ -9,6 +9,11 @@
 [ext_resource type="PackedScene" uid="uid://d31jlldr5f2ur" path="res://Scenes/InventoryScenes/Inventory.tscn" id="6_4iapt"]
 [ext_resource type="Script" path="res://Scenes/inventory_interface.gd" id="7_uwfkk"]
 [ext_resource type="PackedScene" uid="uid://c15dj2v3hj7v7" path="res://Scenes/InventoryScenes/slot.tscn" id="9_s8q51"]
+[ext_resource type="PackedScene" uid="uid://c84aqtgi023wn" path="res://Interactable/chest.tscn" id="10_6y0in"]
+[ext_resource type="Script" path="res://Scripts/InventoryScripts/Inventory_Data.gd" id="11_a61a3"]
+[ext_resource type="Resource" uid="uid://d34ne0v0t4rqs" path="res://Inventory/Items/Apple.tres" id="12_8i5ey"]
+[ext_resource type="Script" path="res://Scripts/InventoryScripts/Slot_Data.gd" id="13_q3p3q"]
+[ext_resource type="Resource" uid="uid://wnnjclxymmkg" path="res://Inventory/Items/Blue_Book.tres" id="14_6f7nx"]
 
 [sub_resource type="Environment" id="Environment_4s7r7"]
 sdfgi_enabled = true
@@ -32,6 +37,30 @@ uv1_triplanar = true
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rdaho"]
 albedo_texture = ExtResource("4_opup5")
 uv1_triplanar = true
+
+[sub_resource type="Resource" id="Resource_oonjo"]
+script = ExtResource("13_q3p3q")
+item_data = ExtResource("12_8i5ey")
+quantity = 83
+
+[sub_resource type="Resource" id="Resource_7eose"]
+script = ExtResource("13_q3p3q")
+item_data = ExtResource("12_8i5ey")
+quantity = 4
+
+[sub_resource type="Resource" id="Resource_jp227"]
+script = ExtResource("13_q3p3q")
+item_data = ExtResource("12_8i5ey")
+quantity = 7
+
+[sub_resource type="Resource" id="Resource_7y4tl"]
+script = ExtResource("13_q3p3q")
+item_data = ExtResource("14_6f7nx")
+quantity = 1
+
+[sub_resource type="Resource" id="Resource_lxuya"]
+script = ExtResource("11_a61a3")
+slot_datas = Array[ExtResource("13_q3p3q")]([SubResource("Resource_oonjo"), SubResource("Resource_7eose"), SubResource("Resource_jp227"), SubResource("Resource_7y4tl"), null])
 
 [node name="World" type="Node3D"]
 script = ExtResource("1_pdp88")
@@ -86,10 +115,18 @@ metadata/_edit_use_anchors_ = true
 
 [node name="PlayerInventory" parent="UI/InventoryInterface" instance=ExtResource("6_4iapt")]
 layout_mode = 0
-offset_left = 10.0
-offset_top = 10.0
-offset_right = 50.0
-offset_bottom = 50.0
+offset_left = 9.0
+offset_top = 11.0
+offset_right = 49.0
+offset_bottom = 51.0
+
+[node name="ExternalInventory" parent="UI/InventoryInterface" instance=ExtResource("6_4iapt")]
+visible = false
+layout_mode = 0
+offset_left = 429.0
+offset_top = 367.0
+offset_right = 469.0
+offset_bottom = 407.0
 
 [node name="GrabbedSlot" parent="UI/InventoryInterface" instance=ExtResource("9_s8q51")]
 visible = false
@@ -98,3 +135,7 @@ self_modulate = Color(1, 1, 1, 0)
 layout_mode = 0
 offset_right = 64.0
 offset_bottom = 64.0
+
+[node name="Chest" parent="." instance=ExtResource("10_6y0in")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.82555, 0, 0)
+inventory_data = SubResource("Resource_lxuya")
