@@ -11,11 +11,14 @@ var walking_speed = 2
 var running_speed = 3
 var running = false
 
+@export var inventory_data: InventoryData
 @export var sens_horizontal = 0.25
 @export var sens_vertical = 0.25
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
+
+signal toggle_inventory()
 
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -25,6 +28,9 @@ func _input(event):
 		rotate_y(deg_to_rad(-event.relative.x * sens_horizontal))
 		visuals.rotate_y(deg_to_rad(event.relative.x * sens_horizontal))
 		camera_mount.rotate_x(deg_to_rad(-event.relative.y * sens_vertical))
+	
+	if Input.is_action_just_pressed("inventory"):
+		toggle_inventory.emit()
 
 func _physics_process(delta):
 	if Input.is_action_pressed("run"):
