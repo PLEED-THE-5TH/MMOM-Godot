@@ -18,10 +18,12 @@ var running = false
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
+var health: int = 100
 
 signal toggle_inventory()
 
 func _ready():
+	PlayerManager.player = self
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func _input(event):
@@ -79,3 +81,10 @@ func _physics_process(delta):
 func interact() -> void:
 	if interact_ray.is_colliding():
 		interact_ray.get_collider().player_interact()
+
+func get_drop_position() -> Vector3:
+	var direction = -camera_mount.global_transform.basis.z
+	return camera_mount.global_position + direction
+
+func heal(heal_value: int) -> void:
+	health += heal_value
