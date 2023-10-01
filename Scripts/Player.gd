@@ -15,6 +15,7 @@ var running = false
 @export var inventory_data: InventoryData
 @export var sens_horizontal = 0.25
 @export var sens_vertical = 0.25
+@export var equip_inventory_data: InventoryDataEquip
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
