@@ -6,6 +6,7 @@ class_name Player
 @onready var animation_player = $Visuals/mixamo_base/AnimationPlayer
 @onready var visuals = $Visuals
 @onready var interact_ray = $Camera_Mount/Camera3D/InteractRay
+@onready var pause_menu = $"../UI/PauseMenu"
 
 var SPEED = 2
 const JUMP_VELOCITY = 4.5
@@ -44,7 +45,7 @@ func _input(event):
 		interact()
 	
 	if Input.is_action_just_pressed("esq"):
-		get_tree().quit()
+		pause_menu.toggle_pausemenu()
 	
 	if Input.is_action_just_pressed("ult"):
 		test_func()
@@ -57,7 +58,6 @@ func test_func() -> void:
 	pass
 
 func toggle_fullscreen() -> void:
-	print(fullscreen_toggle)
 	if fullscreen_toggle == false:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 		fullscreen_toggle = true
