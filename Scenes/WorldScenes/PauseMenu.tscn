@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bfnwmi3yiabl8"]
+
+[node name="PauseMenu" type="PanelContainer"]
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
