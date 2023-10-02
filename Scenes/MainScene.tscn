@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://c2i1ufdjor4ks"]
+[gd_scene load_steps=30 format=3 uid="uid://c2i1ufdjor4ks"]
 
 [ext_resource type="Texture2D" uid="uid://chbqvnk34gr0o" path="res://Assets/Textures/KennyTextures/Vector/texture_02.svg" id="1_4a100"]
 [ext_resource type="Script" path="res://Scenes/MainScene.gd" id="1_pdp88"]
@@ -16,7 +16,7 @@
 [ext_resource type="Resource" uid="uid://d34ne0v0t4rqs" path="res://Inventory/Items/Apple.tres" id="12_8i5ey"]
 [ext_resource type="Script" path="res://Scripts/InventoryScripts/Slot_Data.gd" id="13_q3p3q"]
 [ext_resource type="Resource" uid="uid://wnnjclxymmkg" path="res://Inventory/Items/Blue_Book.tres" id="14_6f7nx"]
-[ext_resource type="PackedScene" uid="uid://bl0nujp057pfl" path="res://Inventory/Items/pickup.tscn" id="15_8l78w"]
+[ext_resource type="Script" path="res://Scripts/WorldGrid.gd" id="17_fmtfa"]
 
 [sub_resource type="Environment" id="Environment_4s7r7"]
 sdfgi_enabled = true
@@ -69,12 +69,8 @@ quantity = 1
 script = ExtResource("11_a61a3")
 slot_datas = Array[ExtResource("13_q3p3q")]([SubResource("Resource_oonjo"), SubResource("Resource_7eose"), SubResource("Resource_jp227"), SubResource("Resource_7y4tl"), null])
 
-[sub_resource type="Resource" id="Resource_sxqnc"]
-script = ExtResource("13_q3p3q")
-item_data = ExtResource("12_8i5ey")
-quantity = 8
-
 [node name="World" type="Node3D"]
+process_mode = 3
 script = ExtResource("1_pdp88")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
@@ -166,11 +162,10 @@ offset_bottom = 50.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.82555, 0, 0)
 inventory_data = SubResource("Resource_lxuya")
 
-[node name="Pickup" parent="." instance=ExtResource("15_8l78w")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.878147, -5.17724)
-slot_data = SubResource("Resource_sxqnc")
+[node name="WorldGrid" type="GridMap" parent="."]
+cell_size = Vector3(0.5, 0.5, 0.5)
+script = ExtResource("17_fmtfa")
 
 [connection signal="drop_slot_data" from="UI/InventoryInterface" to="." method="_on_inventory_interface_drop_slot_data"]
-[connection signal="gui_input" from="UI/InventoryInterface" to="." method="_on_inventory_interface_gui_input"]
 [connection signal="gui_input" from="UI/InventoryInterface" to="UI/InventoryInterface" method="_on_gui_input"]
 [connection signal="visibility_changed" from="UI/InventoryInterface" to="UI/InventoryInterface" method="_on_visibility_changed"]

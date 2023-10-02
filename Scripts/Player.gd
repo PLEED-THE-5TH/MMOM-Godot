@@ -1,5 +1,7 @@
 extends CharacterBody3D
 
+class_name Player
+
 @onready var camera_mount = $Camera_Mount
 @onready var animation_player = $Visuals/mixamo_base/AnimationPlayer
 @onready var visuals = $Visuals
@@ -11,6 +13,8 @@ const JUMP_VELOCITY = 4.5
 var walking_speed = 2
 var running_speed = 3
 var running = false
+var freeze_camera = false
+var camera_y_position
 
 @export var inventory_data: InventoryData
 @export var sens_horizontal = 0.25
@@ -28,16 +32,21 @@ func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func _input(event):
-	if event is InputEventMouseMotion:
+	if event is InputEventMouseMotion and !freeze_camera:
 		rotate_y(deg_to_rad(-event.relative.x * sens_horizontal))
 		visuals.rotate_y(deg_to_rad(event.relative.x * sens_horizontal))
 		camera_mount.rotate_x(deg_to_rad(-event.relative.y * sens_vertical))
+		camera_y_position = camera_mount.get_rotation_degrees().x
+		print(camera_y_position)
 	
 	if Input.is_action_just_pressed("inventory"):
 		toggle_inventory.emit()
-		
+	
 	if Input.is_action_just_pressed("interact"):
 		interact()
+	
+	if Input.is_action_just_pressed("esq"):
+		get_tree().quit()
 
 func _physics_process(delta):
 	if Input.is_action_pressed("run"):
@@ -67,7 +76,8 @@ func _physics_process(delta):
 			if animation_player.current_animation != "walking":
 				animation_player.play("walking")
 		
-		visuals.rotation.y = lerp_angle(visuals.rotation.y, atan2(-input_dir.x, -input_dir.y), .25)
+		visuals.rotation.y = \
+		lerp_angle(visuals.rotation.y, atan2(-input_dir.x, -input_dir.y), .25)
 		
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED
