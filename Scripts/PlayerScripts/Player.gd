@@ -6,6 +6,7 @@ class_name Player
 @onready var animation_player = $Visuals/mixamo_base/AnimationPlayer
 @onready var visuals = $Visuals
 @onready var interact_ray = $Camera_Mount/Camera3D/InteractRay
+@onready var pause_menu = $"../UI/PauseMenu"
 
 var SPEED = 2
 const JUMP_VELOCITY = 4.5
@@ -44,20 +45,23 @@ func _input(event):
 		interact()
 	
 	if Input.is_action_just_pressed("esq"):
-		get_tree().quit()
+		pause_menu.toggle_pausemenu()
 	
 	if Input.is_action_just_pressed("ult"):
 		test_func()
 	
 	if Input.is_action_just_pressed("f11"):
 		toggle_fullscreen()
+	
+	if Input.is_action_just_pressed("shoot"):
+		#mining_ray.toggle_mining()
+		pass
 
 func test_func() -> void:
 	print("test func used")
 	pass
 
 func toggle_fullscreen() -> void:
-	print(fullscreen_toggle)
 	if fullscreen_toggle == false:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 		fullscreen_toggle = true
@@ -103,7 +107,7 @@ func _physics_process(delta):
 			animation_player.play("idle")
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
-
+	
 	move_and_slide()
 
 func interact() -> void:
