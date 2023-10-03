@@ -52,6 +52,10 @@ func _input(event):
 	
 	if Input.is_action_just_pressed("f11"):
 		toggle_fullscreen()
+	
+	if Input.is_action_just_pressed("shoot"):
+		#mining_ray.toggle_mining()
+		pass
 
 func test_func() -> void:
 	print("test func used")
@@ -103,7 +107,7 @@ func _physics_process(delta):
 			animation_player.play("idle")
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
-
+	
 	move_and_slide()
 
 func interact() -> void:
