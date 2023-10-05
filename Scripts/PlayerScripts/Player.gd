@@ -2,11 +2,14 @@ extends CharacterBody3D
 
 class_name Player
 
-@onready var camera_mount = $Camera_Mount
-@onready var animation_player = $Visuals/mixamo_base/AnimationPlayer
-@onready var visuals = $Visuals
-@onready var interact_ray = $Camera_Mount/Camera3D/InteractRay
-@onready var pause_menu = $"../UI/PauseMenu"
+@onready var world_grid: GridMap = $"../WorldGrid"
+@onready var mining_ray: RayCast3D = $Camera_Mount/Camera3D/MiningRay
+
+@onready var camera_mount: Node3D = $Camera_Mount
+@onready var animation_player: AnimationPlayer = $Visuals/mixamo_base/AnimationPlayer
+@onready var visuals: Node3D = $Visuals
+@onready var interact_ray: RayCast3D = $Camera_Mount/Camera3D/InteractRay
+@onready var pause_menu: Control = $"../UI/PauseMenu"
 
 var SPEED = 2
 const JUMP_VELOCITY = 4.5
@@ -47,18 +50,19 @@ func _input(event):
 	if Input.is_action_just_pressed("esq"):
 		pause_menu.toggle_pausemenu()
 	
-	if Input.is_action_just_pressed("ult"):
-		test_func()
-	
 	if Input.is_action_just_pressed("f11"):
 		toggle_fullscreen()
+		
+	if Input.is_action_just_pressed("ult"):
+#		world_grid.gen_caves()
+		pass
 	
-	if Input.is_action_just_pressed("shoot"):
-		#mining_ray.toggle_mining()
+	if Input.is_action_just_pressed("flashlight"):
+		world_grid.reset_caves()
 		pass
 
 func test_func() -> void:
-	print("test func used")
+	
 	pass
 
 func toggle_fullscreen() -> void:
@@ -70,6 +74,13 @@ func toggle_fullscreen() -> void:
 		fullscreen_toggle = false
 
 func _physics_process(delta):
+	var shooting: bool = false
+	if Input.is_action_pressed("shoot"):
+		shooting = true
+	
+	if mining_ray.is_colliding() and shooting == true:
+		world_grid.set_cell_item(Vector3(mining_ray.get_collision_point()), 1)
+	
 	if Input.is_action_pressed("run"):
 		SPEED = running_speed
 		running = true
@@ -77,16 +88,12 @@ func _physics_process(delta):
 		SPEED = walking_speed
 		running = false
 	
-	# Add the gravity.
 	if not is_on_floor():
 		velocity.y -= gravity * delta
-
-	# Handle Jump.
+	
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
-
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
+	
 	var input_dir = Input.get_vector("left", "right", "forward", "backward")
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if direction:
@@ -120,4 +127,3 @@ func get_drop_position() -> Vector3:
 
 func heal(heal_value: int) -> void:
 	health += heal_value
-
