@@ -2,52 +2,26 @@ extends Node3D
 
 @onready var mining_orb = $".."
 @onready var mining_ray = $"../../../Camera_Mount/Camera3D/MiningRay"
-@onready var laser_beam = $LaserBeam
+@onready var laser_beam: MeshInstance3D = $LaserBeam
 @onready var camera_3d = $"../../../Camera_Mount/Camera3D"
-
-#func _process(delta: float) -> void:
-#	var cam_pos = camera_3d.global_position
-#	var orb_pos = mining_orb.global_position
-#	var mray_hitpoint = mining_ray.get_collision_point()
-#
-#
-#
-#	laser_beam.global_transform.origin = mray_hitpoint
-#	laser_beam.mesh.height = mray_hitpoint.x
-#
-#	pass
-
-@export var laser_origin_node: Node3D
 @export var max_laser_range := 20
 @export var sky_aim_distance := 20
 
-func draw_line(start: Vector3, end:Vector3, start_radius: float, end_radius: float):
-	# replace with your logic here
-	# probably update the positions of a line renderer node
-	pass
-
 func _process(delta):
+	gen_laser(mining_ray.get_collision_point() if mining_ray.is_colliding() else get_laser_sky_dist())
+
+func gen_laser(end_point):
+	var laser_length = mining_orb.global_position.distance_to(end_point)
+	var start_radius = 1.0
+	var end_radius = 0.5
+	var mid_point = (end_point + mining_orb.global_position) / 2
 	
-	# replace this with your raycast from camera logic!
-	var did_hit = false;
-	var hit_point = Vector3(0,10,0)
-	
-	var world_aim_point = Vector3.ZERO
-	if did_hit:
-		world_aim_point = hit_point
-	else:
-		# aim over an arbitrary position. this makes more sense for projectiles than a laser
-		var camera_forward = (camera_3d.global_transform.basis.z) # may have to flip the sign here
-		world_aim_point = camera_3d.global_position + max_laser_range * camera_forward
-	
-	if did_hit:
-		var start = mining_orb.global_position
-		var end =  world_aim_point
-		var laser_length = start.distance_to(end)
-		
-		var start_radius = 1.0
-		var end_radius = 0.5
-		draw_line(start, end, start_radius, end_radius)
-	else:
-		# logic here up to you - abruptly turning off the laser if you go over sky might be weird
-		pass
+	laser_beam.look_at_from_position(mid_point,  end_point)
+	#laser_beam.scale.y = mining_orb.global_position.distance_to(end_point) * 2
+	#laser_beam.transform = laser_beam.transform.rotated_local(Vector3.RIGHT, 90)
+
+func get_laser_sky_dist() -> Vector3:
+	var diff = camera_3d.global_position - mining_orb.global_position
+	var dot = camera_3d.basis.z.dot(diff)
+	var dist = -dot + sqrt(pow(dot, 2) - (diff.length_squared() - pow(max_laser_range, 2)))
+	return camera_3d.global_position + camera_3d.basis.z * dist
