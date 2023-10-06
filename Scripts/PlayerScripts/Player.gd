@@ -73,9 +73,8 @@ func toggle_fullscreen() -> void:
 func _physics_process(delta):
 	var shooting = Input.is_action_pressed("shoot")
 	laser.shoot = shooting
-		
 	if mining_ray.is_colliding() and shooting:
-		world_grid.set_cell_item(Vector3(mining_ray.get_collision_point()), 1)
+		world_grid.set_cell_item(Vector3(mining_ray.get_collision_point())*2, 1)
 	
 	if Input.is_action_pressed("run"):
 		SPEED = running_speed
