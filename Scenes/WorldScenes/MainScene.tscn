@@ -65,43 +65,46 @@ var noise: FastNoiseLite = FastNoiseLite.new()
 @export var height = 50
 @export var depth = 50
 
-@export var gain : float = 0.5
+@export var gain : float = 0.5 # I like 8
 @export var lacunarity : float = 2.0
-@export var octaves : int = 5
-@export var ping_pong_strength : float = 2.0
-@export var fractal_type = 1
+@export var octaves : int = 5 # I like 4
 @export var weighted_strength : float = 0.0
 @export var frequency : float = 0.01
-@export var noise_type = 1
+
+@export var cellular_distance = 0
+@export var cellular_jitter = 0.45
+@export var cellular_return_type = 1
 
 func _ready():
-	noise.seed = randi()
-	noise.fractal_gain =  gain
-	noise.fractal_lacunarity = lacunarity
+#	noise.seed = randi()
+	noise.fractal_gain =  gain # + =Condenses. More smaller caves
+	noise.fractal_lacunarity = lacunarity # + = Kinda scaters it, more fuzz
 	noise.fractal_octaves = octaves
-	noise.fractal_ping_pong_strength = ping_pong_strength
-	noise.fractal_type = fractal_type
 	noise.fractal_weighted_strength = weighted_strength
 	noise.frequency = frequency
-	noise.noise_type = noise_type
-	generate_chunk()
 
-func _process(delta):
-	pass
+	noise.set_noise_type(FastNoiseLite.TYPE_CELLULAR)
+	noise.seed = 0
+	noise.cellular_distance_function = cellular_distance
+	noise.cellular_jitter = cellular_jitter
+	noise.cellular_return_type = cellular_return_type
+
+	generate_chunk()
 
 func reset_caves():
 	get_tree().reload_current_scene()
 
 func generate_chunk():
+	print(\"tried\")
 	for x in range(width):
 		for y in range(height):
 			for z in range(depth):
 				var n = noise.get_noise_3d(x,y,z)
 				set_cell_item(Vector3i(x,y,z), 1, 0)
 				if n < 0:
-					set_cell_item(Vector3i(x,y,z), 1, 0)
-				if n > 0:
 					set_cell_item(Vector3i(x,y,z), 0, 0)
+				if n > 0:
+					set_cell_item(Vector3i(x,y,z), 1, 0)
 
 #PURE noise generation below
 
@@ -296,7 +299,13 @@ mesh_library = ExtResource("15_iwti7")
 physics_material = SubResource("PhysicsMaterial_sabnf")
 cell_size = Vector3(1, 1, 1)
 script = SubResource("GDScript_ko6kn")
-frequency = 0.23
+width = 100
+depth = 100
+gain = 8.0
+octaves = 4
+frequency = 0.02
+cellular_distance = 3
+cellular_jitter = 0.6
 metadata/_editor_floor_ = Vector3(0, 0, 0)
 
 [connection signal="drop_slot_data" from="UI/InventoryInterface" to="." method="_on_inventory_interface_drop_slot_data"]
