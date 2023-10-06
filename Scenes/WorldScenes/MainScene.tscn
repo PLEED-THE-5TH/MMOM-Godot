@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://chbqvnk34gr0o" path="res://Assets/Textures/KennyTextures/Vector/texture_02.svg" id="1_4a100"]
 [ext_resource type="Script" path="res://Scripts/WorldScripts/MainScene.gd" id="1_5cs7q"]
 [ext_resource type="PackedScene" uid="uid://b8ds1i6ivs72m" path="res://Scenes/PlayerScenes/Player.tscn" id="5_rrdk8"]
-[ext_resource type="PackedScene" uid="uid://d31jlldr5f2ur" path="res://Scenes/InventoryScenes/inventory.tscn" id="6_4iapt"]
+[ext_resource type="PackedScene" uid="uid://d31jlldr5f2ur" path="res://Scenes/InventoryScenes/Inventory.tscn" id="6_4iapt"]
 [ext_resource type="Script" path="res://Scripts/InventoryScripts/inventory_data_equip.gd" id="7_1uk4m"]
 [ext_resource type="Script" path="res://Scripts/InventoryScripts/inventory_interface.gd" id="8_f7wt2"]
 [ext_resource type="PackedScene" uid="uid://c15dj2v3hj7v7" path="res://Scenes/InventoryScenes/slot.tscn" id="9_s8q51"]

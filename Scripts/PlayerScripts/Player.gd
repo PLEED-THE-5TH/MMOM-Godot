@@ -10,6 +10,7 @@ class_name Player
 @onready var visuals: Node3D = $Visuals
 @onready var interact_ray: RayCast3D = $Camera_Mount/Camera3D/InteractRay
 @onready var pause_menu: Control = $"../UI/PauseMenu"
+@onready var laser: Laser = $Mining_Mount/MiningOrb/Laser
 
 var SPEED = 2
 const JUMP_VELOCITY = 4.5
@@ -61,10 +62,6 @@ func _input(event):
 		world_grid.reset_caves()
 		pass
 
-func test_func() -> void:
-	
-	pass
-
 func toggle_fullscreen() -> void:
 	if fullscreen_toggle == false:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
@@ -74,11 +71,10 @@ func toggle_fullscreen() -> void:
 		fullscreen_toggle = false
 
 func _physics_process(delta):
-	var shooting: bool = false
-	if Input.is_action_pressed("shoot"):
-		shooting = true
-	
-	if mining_ray.is_colliding() and shooting == true:
+	var shooting = Input.is_action_pressed("shoot")
+	laser.shoot = shooting
+		
+	if mining_ray.is_colliding() and shooting:
 		world_grid.set_cell_item(Vector3(mining_ray.get_collision_point()), 1)
 	
 	if Input.is_action_pressed("run"):

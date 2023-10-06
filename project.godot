@@ -24,6 +24,10 @@ PlayerManager="*res://Scripts/PlayerScripts/player_manager.gd"
 
 window/size/initial_position=Vector2i(0, 170)
 
+[dotnet]
+
+project/assembly_name="Godot"
+
 [input]
 
 shoot={
