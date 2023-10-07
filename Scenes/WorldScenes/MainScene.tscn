@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://c2i1ufdjor4ks"]
+[gd_scene load_steps=28 format=3 uid="uid://c2i1ufdjor4ks"]
 
 [ext_resource type="Texture2D" uid="uid://chbqvnk34gr0o" path="res://Assets/Textures/KennyTextures/Vector/texture_02.svg" id="1_4a100"]
 [ext_resource type="Script" path="res://Scripts/WorldScripts/MainScene.gd" id="1_5cs7q"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" path="res://Scripts/InventoryScripts/Slot_Data.gd" id="13_q3p3q"]
 [ext_resource type="Resource" uid="uid://wnnjclxymmkg" path="res://Inventory/Items/Blue_Book.tres" id="14_6f7nx"]
 [ext_resource type="MeshLibrary" uid="uid://6a51t2wglraa" path="res://Assets/Meshes/tiles.tres" id="15_iwti7"]
+[ext_resource type="PackedScene" uid="uid://bbpvabochc8wy" path="res://Scenes/InventoryScenes/loot_bag.tscn" id="16_eay0f"]
 
 [sub_resource type="Environment" id="Environment_4s7r7"]
 sdfgi_enabled = true
@@ -294,7 +295,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6)
 inventory_data = SubResource("Resource_lxuya")
 
 [node name="WorldGrid" type="GridMap" parent="."]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 mesh_library = ExtResource("15_iwti7")
 physics_material = SubResource("PhysicsMaterial_sabnf")
 cell_size = Vector3(1, 1, 1)
@@ -304,7 +304,10 @@ depth = 100
 gain = 8.0
 octaves = 4
 frequency = 0.02
-metadata/_editor_floor_ = Vector3(0, 0, 0)
+metadata/_editor_floor_ = Vector3(0, -2, 0)
+
+[node name="LootBag" parent="." instance=ExtResource("16_eay0f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
 
 [connection signal="drop_slot_data" from="UI/InventoryInterface" to="." method="_on_inventory_interface_drop_slot_data"]
 [connection signal="gui_input" from="UI/InventoryInterface" to="UI/InventoryInterface" method="_on_gui_input"]
