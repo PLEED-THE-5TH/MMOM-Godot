@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://b1eqel0tasuyo"]
+
+[ext_resource type="Script" path="res://Scripts/Inventory/UI/InventoryUI.gd" id="1_wi8mu"]
+
+[node name="Inventory" type="AspectRatioContainer"]
+size_flags_horizontal = 3
+size_flags_vertical = 3
+stretch_mode = 0
+alignment_vertical = 0
+script = ExtResource("1_wi8mu")
+
+[node name="Slot Grid" type="GridContainer" parent="."]
+layout_mode = 2

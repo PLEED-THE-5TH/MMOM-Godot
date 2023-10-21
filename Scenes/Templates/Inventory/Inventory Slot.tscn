@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://dnem4mqkftmro"]
+
+[ext_resource type="Script" path="res://Scripts/Inventory/InventorySlot.gd" id="1_220xc"]
+[ext_resource type="Texture2D" uid="uid://c36f2qlbd3ovb" path="res://Assets/Textures/Inventory Slot.png" id="2_15tfn"]
+[ext_resource type="PackedScene" uid="uid://cdwgqxy54y8kl" path="res://Scenes/Templates/Inventory/Item Stack.tscn" id="3_1q54j"]
+
+[node name="Inventory Slot" type="AspectRatioContainer"]
+anchors_preset = -1
+anchor_right = 0.04
+anchor_bottom = 0.071
+offset_bottom = 0.0749969
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_220xc")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("2_15tfn")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Item Stack" parent="." instance=ExtResource("3_1q54j")]
+layout_mode = 2
+stretch_mode = 3

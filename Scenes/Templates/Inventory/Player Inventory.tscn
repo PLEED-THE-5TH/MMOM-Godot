@@ -1,0 +1,140 @@
+[gd_scene load_steps=5 format=3 uid="uid://dl2kyphtpb200"]
+
+[ext_resource type="Script" path="res://Scripts/Inventory/UI/PlayerInventoryUI.gd" id="1_wojp1"]
+[ext_resource type="Script" path="res://Scripts/Inventory/UI/PlayerInventoryView.gd" id="2_u0q1v"]
+[ext_resource type="PackedScene" uid="uid://dnem4mqkftmro" path="res://Scenes/Templates/Inventory/Inventory Slot.tscn" id="2_xbca6"]
+[ext_resource type="Script" path="res://Scripts/Inventory/RestrictedInventorySlot.gd" id="3_7e5fo"]
+
+[node name="Player Inventory" type="VBoxContainer"]
+anchors_preset = -1
+anchor_right = 0.833
+anchor_bottom = 0.889
+offset_right = 0.399902
+offset_bottom = -0.0750122
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+script = ExtResource("1_wojp1")
+
+[node name="Top" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="Equipment" type="HBoxContainer" parent="Top"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Armor" type="VBoxContainer" parent="Top/Equipment"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Helmet" parent="Top/Equipment/Armor" instance=ExtResource("2_xbca6")]
+layout_mode = 2
+script = ExtResource("3_7e5fo")
+
+[node name="Chestplate" parent="Top/Equipment/Armor" instance=ExtResource("2_xbca6")]
+layout_mode = 2
+script = ExtResource("3_7e5fo")
+
+[node name="Leggings" parent="Top/Equipment/Armor" instance=ExtResource("2_xbca6")]
+layout_mode = 2
+script = ExtResource("3_7e5fo")
+
+[node name="Boots" parent="Top/Equipment/Armor" instance=ExtResource("2_xbca6")]
+layout_mode = 2
+script = ExtResource("3_7e5fo")
+
+[node name="Player Preview" type="Control" parent="Top/Equipment"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Tools" type="VBoxContainer" parent="Top/Equipment"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Mining Tool" parent="Top/Equipment/Tools" instance=ExtResource("2_xbca6")]
+layout_mode = 2
+script = ExtResource("3_7e5fo")
+
+[node name="Weapon" parent="Top/Equipment/Tools" instance=ExtResource("2_xbca6")]
+layout_mode = 2
+script = ExtResource("3_7e5fo")
+
+[node name="Accessories" type="HBoxContainer" parent="Top/Equipment/Tools"]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="Accessory 1" parent="Top/Equipment/Tools/Accessories" instance=ExtResource("2_xbca6")]
+layout_mode = 2
+script = ExtResource("3_7e5fo")
+
+[node name="Accessory 2" parent="Top/Equipment/Tools/Accessories" instance=ExtResource("2_xbca6")]
+layout_mode = 2
+script = ExtResource("3_7e5fo")
+
+[node name="Info Tabs" type="TabContainer" parent="Top"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Item Info" type="Control" parent="Top/Info Tabs"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Top/Info Tabs/Item Info"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 5
+
+[node name="Text" type="RichTextLabel" parent="Top/Info Tabs/Item Info/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+scroll_active = false
+threaded = true
+
+[node name="Other Tab" type="Control" parent="Top/Info Tabs"]
+visible = false
+layout_mode = 2
+
+[node name="Bottom" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Inventory View" type="Control" parent="Bottom"]
+clip_contents = true
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("2_u0q1v")
+
+[node name="Aspect Ratio Container" type="AspectRatioContainer" parent="Bottom/Inventory View"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+stretch_mode = 0
+alignment_vertical = 0
+
+[node name="Slot Grid" type="GridContainer" parent="Bottom/Inventory View/Aspect Ratio Container"]
+layout_mode = 2
+
+[node name="Scroll Bar" type="VScrollBar" parent="Bottom"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+page = 30.0
