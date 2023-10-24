@@ -40,7 +40,7 @@ func _exit_tree() -> void:
 		dock.queue_free()
 
 func _get_plugin_icon() -> Texture2D:
-	return base_control.get_theme_icon("ScriptCreate", "EditorIcons")
+	return get_editor_interface().get_base_control().get_theme_icon("ScriptCreate", "EditorIcons")
 
 func _get_plugin_name() -> String:
 	return "Create Item"
