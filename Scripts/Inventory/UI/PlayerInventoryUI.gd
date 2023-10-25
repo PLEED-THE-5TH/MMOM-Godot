@@ -21,37 +21,25 @@ func init(inventory: PlayerInventory, columns: int) -> void:
 		item_slot.name = "Slot " + str(index)
 		slot_grid.add_child(item_slot)
 	
-	var helmet_slot: RestrictedInventorySlot = $"Top/Equipment/Armor/Helmet"
-	helmet_slot.init(ItemStack.new(), Helmet)
-	_connect_slot(helmet_slot)
-	var chestplate_slot: RestrictedInventorySlot = $"Top/Equipment/Armor/Chestplate"
-	chestplate_slot.init(ItemStack.new(), Chestplate)
-	_connect_slot(chestplate_slot)
-	var leggings_slot: RestrictedInventorySlot = $"Top/Equipment/Armor/Leggings"
-	leggings_slot.init(ItemStack.new(), Leggings)
-	_connect_slot(leggings_slot)
-	var boots_slot: RestrictedInventorySlot = $"Top/Equipment/Armor/Boots"
-	boots_slot.init(ItemStack.new(), Boots)
-	_connect_slot(boots_slot)
+	var restricted_slot_types: Dictionary = {
+		$"Top/Equipment/Armor/Helmet": Helmet,
+		$"Top/Equipment/Armor/Chestplate": Chestplate,
+		$"Top/Equipment/Armor/Leggings": Leggings,
+		$"Top/Equipment/Armor/Boots": Boots,
+		$"Top/Equipment/Tools/Mining Tool": MiningTool,
+		$"Top/Equipment/Tools/Weapon": Weapon,
+		$"Top/Equipment/Tools/Accessories/Accessory 1": Accessory,
+		$"Top/Equipment/Tools/Accessories/Accessory 2": Accessory
+	}
 	
-	var mining_tool_slot: RestrictedInventorySlot = $"Top/Equipment/Tools/Mining Tool"
-	mining_tool_slot.init(ItemStack.new(), MiningTool)
-	_connect_slot(mining_tool_slot)
-	var weapon_slot: RestrictedInventorySlot = $"Top/Equipment/Tools/Weapon"
-	weapon_slot.init(ItemStack.new(), Weapon)
-	_connect_slot(weapon_slot)
-	
-	var accessory_1_slot: RestrictedInventorySlot = $"Top/Equipment/Tools/Accessories/Accessory 1"
-	accessory_1_slot.init(ItemStack.new(), Accessory)
-	_connect_slot(accessory_1_slot)
-	var accessory_2_slot: RestrictedInventorySlot = $"Top/Equipment/Tools/Accessories/Accessory 2"
-	accessory_2_slot.init(ItemStack.new(), Accessory)
-	_connect_slot(accessory_2_slot)
+	for slot in restricted_slot_types:
+		slot.init(ItemStack.new(), restricted_slot_types[slot])
+		_connect_slot(slot)
 
-func _connect_slot(item_slot: InventorySlot) -> void:
-	item_slot.gui_input.connect(_slot_on_click)
-	item_slot.mouse_entered.connect(_get_slot_on_mouse_enter(item_slot))
-	item_slot.mouse_exited.connect(_slot_on_mouse_exited)
+func _connect_slot(slot: InventorySlot) -> void:
+	slot.gui_input.connect(_slot_on_click)
+	slot.mouse_entered.connect(_get_slot_on_mouse_enter(slot))
+	slot.mouse_exited.connect(_slot_on_mouse_exited)
 
 func _slot_on_click(event: InputEvent):
 	if not(event is InputEventMouseButton):
