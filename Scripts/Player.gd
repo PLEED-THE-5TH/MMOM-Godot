@@ -28,5 +28,7 @@ func _ready():
 	inventory.auto_add(ItemStack.new(book))
 	inventory.auto_add(ItemStack.new(book, 3))
 	inventory.auto_add(ItemStack.new(wood_sword))
-	
-	InventoryManager.toggle_inventories()
+
+func _process(_delta: float) -> void:
+	if Input.is_action_just_pressed("Toggle Inventories"):
+		InventoryManager.toggle_inventories()

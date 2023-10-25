@@ -8,6 +8,7 @@ var scroll_sensitivity: float = 5
 
 func _ready() -> void:
 	scroll_bar.value_changed.connect(_handle_scroll)
+	visibility_changed.connect(_on_visibility_changed)
 
 func _gui_input(event: InputEvent) -> void:
 	var mouse_button_event: InputEventMouseButton = event as InputEventMouseButton
@@ -21,8 +22,17 @@ func _gui_input(event: InputEvent) -> void:
 		MOUSE_BUTTON_WHEEL_UP:
 			scroll_bar.value -= scroll_sensitivity
 
-func _handle_scroll(new_value: float) -> void:
+func _on_visibility_changed() -> void:
+	if not is_visible_in_tree():
+		return
+	
+	call_deferred("_correct_container_posiiton")
+
+func _handle_scroll(_new_value: float) -> void:
+	_correct_container_posiiton()
+	
+func _correct_container_posiiton() -> void:
 	var aspect_ratio_container: AspectRatioContainer = $"Aspect Ratio Container"
 	var slot_grid: GridContainer = $"Aspect Ratio Container/Slot Grid"
 	
-	aspect_ratio_container.position.y = (aspect_ratio_container.size.y - slot_grid.size.y) * new_value / scroll_bar.max_value
+	aspect_ratio_container.position.y = (aspect_ratio_container.size.y - slot_grid.size.y - scroll_bar.page) * scroll_bar.value / scroll_bar.max_value
