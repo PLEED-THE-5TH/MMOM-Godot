@@ -5,10 +5,19 @@ var scroll_sensitivity: float = 5
 @onready var scroll_bar: VScrollBar = $"../Scroll Bar":
 	get:
 		return scroll_bar
+@onready var aspect_ratio_container: AspectRatioContainer = $"Aspect Ratio Container":
+	get:
+		return aspect_ratio_container
+@onready var slot_grid: GridContainer = $"Aspect Ratio Container/Slot Grid":
+	get:
+		return slot_grid
 
 func _ready() -> void:
 	scroll_bar.value_changed.connect(_handle_scroll)
-	visibility_changed.connect(_on_visibility_changed)
+	
+	# if anything causes the aspect ratio container to change size/location,
+	# reset it to where it should be
+	aspect_ratio_container.item_rect_changed.connect(func(): call_deferred("_correct_container_position"))
 
 func _gui_input(event: InputEvent) -> void:
 	var mouse_button_event: InputEventMouseButton = event as InputEventMouseButton
@@ -22,17 +31,8 @@ func _gui_input(event: InputEvent) -> void:
 		MOUSE_BUTTON_WHEEL_UP:
 			scroll_bar.value -= scroll_sensitivity
 
-func _on_visibility_changed() -> void:
-	if not is_visible_in_tree():
-		return
-	
-	call_deferred("_correct_container_posiiton")
-
 func _handle_scroll(_new_value: float) -> void:
-	_correct_container_posiiton()
+	_correct_container_position()
 	
-func _correct_container_posiiton() -> void:
-	var aspect_ratio_container: AspectRatioContainer = $"Aspect Ratio Container"
-	var slot_grid: GridContainer = $"Aspect Ratio Container/Slot Grid"
-	
+func _correct_container_position() -> void:
 	aspect_ratio_container.position.y = (aspect_ratio_container.size.y - slot_grid.size.y - scroll_bar.page) * scroll_bar.value / scroll_bar.max_value
