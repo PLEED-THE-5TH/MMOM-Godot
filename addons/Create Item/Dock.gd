@@ -4,7 +4,7 @@ extends Control
 class_name CIPDock
 
 @onready var name_input: LineEdit = $"Elements/Fields/Name Input"
-@onready var parent_input: LineEdit = $"Elements/Fields/Parent Input"
+@onready var parent_input: LineEdit = $"Elements/Fields/Parent/Parent Input"
 @onready var max_stack_size_input: SpinBox = $"Elements/Fields/Max Stack Size Input"
 @onready var description_input: TextEdit = $"Elements/Fields/Description Input"
 @onready var save_path_input: LineEdit = $"Elements/Fields/Save Path Input"

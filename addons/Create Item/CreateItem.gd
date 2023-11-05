@@ -25,11 +25,23 @@ static func _load_defaults() -> void:
 	
 	dock.name_input.text = defaults.get_value("defaults", "name")
 	dock.parent_input.text = defaults.get_value("defaults", "parent")
+	_load_default_parent_options(defaults)
 	dock.max_stack_size_input.value = int(defaults.get_value("defaults", "max_stack_size"))
 	dock.description_input.text = defaults.get_value("defaults", "description")
 	dock.save_path_input.text = defaults.get_value("defaults", "save_path")
 	dock.resource_manager_path_input.text = defaults.get_value("defaults", "resource_manager_path")
 	dock.icon_path_input.text = defaults.get_value("defaults", "icon_path")
+
+static func _load_default_parent_options(defaults: ConfigFile) -> void:
+	var parent_options: OptionButton = dock.parent_input.options
+	
+	while parent_options.item_count > 0:
+		parent_options.remove_item(0)
+	
+	for option in defaults.get_value("defaults", "parent_options"):
+		dock.parent_input.options.add_item(option)
+	
+	parent_options.select(-1)
 
 func _make_visible(visible) -> void:
 	if dock:
