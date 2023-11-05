@@ -1,4 +1,4 @@
-extends Node
+extends Node3D
 
 class_name Player
 
@@ -32,3 +32,6 @@ func _ready():
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("Toggle Inventories"):
 		InventoryManager.toggle_inventories()
+	
+	if Input.is_action_just_pressed("Drop"):
+		held_stack.drop_at(position)

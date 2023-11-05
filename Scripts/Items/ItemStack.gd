@@ -94,6 +94,11 @@ func empty() -> void:
 	_empty()
 	changed.emit()
 
+func drop_at(init_position: Vector3) -> ItemStackDrop:
+	var stack_drop: ItemStackDrop = ItemStackDrop.new(clone(), init_position)
+	empty()
+	return stack_drop
+
 func _empty() -> void:
 	item = null
 	size = 0

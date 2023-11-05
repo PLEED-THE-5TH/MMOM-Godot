@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://7xcumaunp6y1"]
+
+[ext_resource type="Script" path="res://Scripts/Player.gd" id="1_q3fc8"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_sj8op"]
+
+[node name="Player" type="Node3D"]
+script = ExtResource("1_q3fc8")
+
+[node name="Body" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_sj8op")
+
+[node name="Camera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 2.5)

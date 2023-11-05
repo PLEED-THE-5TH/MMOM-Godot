@@ -16,7 +16,6 @@ static func toggle_inventories() -> void:
 		var player: Player = Player.singleton
 		player.inventory.auto_add(player.held_stack)
 		if not player.held_stack.is_empty():
-			# TODO: drop the held stack
-			player.held_stack.empty()
+			player.held_stack.drop_at(player.position)
 	
 	# TODO: check for distance to player

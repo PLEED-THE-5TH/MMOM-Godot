@@ -4,14 +4,14 @@ importer="wavefront_obj"
 importer_version=1
 type="Mesh"
 uid="uid://34ndjrjhvsxl"
-path="res://.godot/imported/Laser.obj-474d3b1c36c2ea528147d2463ee23d76.mesh"
+path="res://.godot/imported/laser.obj-6e7551aa63be6df33ac664998ee51413.mesh"
 
 [deps]
 
-files=["res://.godot/imported/Laser.obj-474d3b1c36c2ea528147d2463ee23d76.mesh"]
+files=["res://.godot/imported/laser.obj-6e7551aa63be6df33ac664998ee51413.mesh"]
 
-source_file="res://Assets/Meshes/Laser.obj"
-dest_files=["res://.godot/imported/Laser.obj-474d3b1c36c2ea528147d2463ee23d76.mesh", "res://.godot/imported/Laser.obj-474d3b1c36c2ea528147d2463ee23d76.mesh"]
+source_file="res://Assets/Meshes/laser.obj"
+dest_files=["res://.godot/imported/laser.obj-6e7551aa63be6df33ac664998ee51413.mesh", "res://.godot/imported/laser.obj-6e7551aa63be6df33ac664998ee51413.mesh"]
 
 [params]
 

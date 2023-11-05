@@ -35,30 +35,27 @@ func init(inventory: PlayerInventory, columns: int) -> void:
 	for slot in restricted_slot_types:
 		slot.init(ItemStack.new(), restricted_slot_types[slot])
 		_connect_slot(slot)
+	
+	Player.singleton.held_stack.changed.connect(_on_held_stack_changed)
 
 func _connect_slot(slot: InventorySlot) -> void:
-	slot.gui_input.connect(_slot_on_click)
 	slot.mouse_entered.connect(_get_slot_on_mouse_enter(slot))
 	slot.mouse_exited.connect(_slot_on_mouse_exited)
 
-func _slot_on_click(event: InputEvent):
-	if not(event is InputEventMouseButton):
-		return
-		
-	if Player.singleton.held_stack.is_empty():
-		return
-
-	item_info_label.text = Player.singleton.held_stack.item.description
+func _on_held_stack_changed() -> void:
+	var held_stack: ItemStack = Player.singleton.held_stack
+	item_info_label.text = "" if held_stack.is_empty() else held_stack.item.description
 
 func _get_slot_on_mouse_enter(item_slot: InventorySlot):
 	return func() -> void:
 		if not Player.singleton.held_stack.is_empty():
 			return
 		
-		if item_slot.item_stack_ui.item_stack.is_empty():
+		var item_stack: ItemStack = item_slot.item_stack_ui.item_stack
+		if item_stack.is_empty():
 			return
 	
-		item_info_label.text = item_slot.item_stack_ui.item_stack.item.description
+		item_info_label.text = item_stack.item.description
 
 func _slot_on_mouse_exited() -> void:
 	if not Player.singleton.held_stack.is_empty():
