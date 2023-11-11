@@ -23,7 +23,7 @@ func _gui_input(event: InputEvent) -> void:
 			_handle_right_click()
 
 func _handle_left_click() -> void:
-	var held_stack: ItemStack = Player.singleton.held_stack
+	var held_stack: ItemStack = Player.held_stack
 	var item_stack: ItemStack = item_stack_ui.item_stack
 	
 	if held_stack.is_empty():
@@ -40,7 +40,7 @@ func _handle_left_click() -> void:
 		item_stack.set_stack(temp)
 
 func _handle_right_click() -> void:
-	var held_stack: ItemStack = Player.singleton.held_stack
+	var held_stack: ItemStack = Player.held_stack
 	var item_stack: ItemStack = item_stack_ui.item_stack
 	
 	if held_stack.is_empty():
@@ -52,7 +52,7 @@ func _handle_right_click() -> void:
 		held_stack.set_item_and_size(item_stack.item, half_size)
 		return
 	
-	var single_stack = ItemStack.new(held_stack.item)
+	var single_stack: ItemStack = ItemStack.new(held_stack.item)
 	if not item_stack.combine(single_stack, true):
 		return
 	

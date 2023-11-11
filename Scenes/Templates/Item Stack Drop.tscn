@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://c6jugatlwy131"]
+
+[ext_resource type="Script" path="res://Scripts/ItemStackDrop.gd" id="1_laokj"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_wi8s7"]
+
+[node name="ItemStackDrop" type="CharacterBody3D"]
+collision_layer = 256
+collision_mask = 2
+script = ExtResource("1_laokj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_wi8s7")
+
+[node name="Sprite" type="Sprite3D" parent="."]
+texture_filter = 2
+
+[node name="PickupArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PickupArea"]
+shape = SubResource("SphereShape3D_wi8s7")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+autostart = true

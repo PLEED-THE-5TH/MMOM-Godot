@@ -11,7 +11,7 @@ func init(item_stack: ItemStack, init_restrict_type: Variant = Item) -> void:
 	restrict_type = init_restrict_type
 
 func _handle_left_click() -> void:
-	var held_stack: ItemStack = Player.singleton.held_stack
+	var held_stack: ItemStack = Player.held_stack
 	var item_stack: ItemStack = item_stack_ui.item_stack
 	
 	if held_stack.is_empty():
@@ -31,7 +31,7 @@ func _handle_left_click() -> void:
 		item_stack.set_stack(temp)
 
 func _handle_right_click() -> void:
-	var held_stack: ItemStack = Player.singleton.held_stack
+	var held_stack: ItemStack = Player.held_stack
 	var item_stack: ItemStack = item_stack_ui.item_stack
 	
 	if held_stack.is_empty():
@@ -46,7 +46,7 @@ func _handle_right_click() -> void:
 	if not is_instance_of(held_stack.item, restrict_type):
 		return
 	
-	var single_stack = ItemStack.new(held_stack.item)
+	var single_stack: ItemStack = ItemStack.new(held_stack.item)
 	if not item_stack.combine(single_stack, true):
 		return
 	

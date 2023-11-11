@@ -9,6 +9,9 @@ static var singleton: InventoryManager:
 func _ready() -> void:
 	singleton = self
 
+static func inventories_visible() -> bool:
+	return singleton.visible
+
 static func toggle_inventories() -> void:
 	singleton.visible = not singleton.visible
 	
@@ -16,6 +19,6 @@ static func toggle_inventories() -> void:
 		var player: Player = Player.singleton
 		player.inventory.auto_add(player.held_stack)
 		if not player.held_stack.is_empty():
-			player.held_stack.drop_at(player.position)
+			player.held_stack.drop()
 	
 	# TODO: check for distance to player

@@ -1,9 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://dl2kyphtpb200"]
+[gd_scene load_steps=6 format=3 uid="uid://dl2kyphtpb200"]
 
 [ext_resource type="Script" path="res://Scripts/Inventory/UI/PlayerInventoryUI.gd" id="1_wojp1"]
 [ext_resource type="Script" path="res://Scripts/Inventory/UI/PlayerInventoryView.gd" id="2_u0q1v"]
 [ext_resource type="PackedScene" uid="uid://dnem4mqkftmro" path="res://Scenes/Templates/Inventory/Inventory Slot.tscn" id="2_xbca6"]
 [ext_resource type="Script" path="res://Scripts/Inventory/RestrictedInventorySlot.gd" id="3_7e5fo"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_nhplf"]
+font_size = 20
 
 [node name="Player Inventory" type="VBoxContainer"]
 anchors_preset = -1
@@ -95,7 +98,18 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 5
 
-[node name="Text" type="RichTextLabel" parent="Top/Info Tabs/Item Info/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Top/Info Tabs/Item Info/MarginContainer"]
+layout_mode = 2
+
+[node name="Name" type="Label" parent="Top/Info Tabs/Item Info/MarginContainer/VBoxContainer"]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_nhplf")
+vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="Top/Info Tabs/Item Info/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Description" type="RichTextLabel" parent="Top/Info Tabs/Item Info/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3

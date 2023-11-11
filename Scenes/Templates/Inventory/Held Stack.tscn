@@ -1,10 +1,10 @@
 [gd_scene load_steps=4 format=3 uid="uid://cdegnfskf411"]
 
 [ext_resource type="Script" path="res://Scripts/Inventory/UI/HeldStackUI.gd" id="1_q6h0x"]
-[ext_resource type="Texture2D" uid="uid://ci4njsnpqq81a" path="res://Assets/Textures/Item Icons/Item Icons.png" id="2_63lba"]
+[ext_resource type="Texture2D" uid="uid://ci4njsnpqq81a" path="res://Textures/Item Icons/Item Icons.png" id="2_u0d2y"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0b5tg"]
-atlas = ExtResource("2_63lba")
+atlas = ExtResource("2_u0d2y")
 region = Rect2(480, 0, 32, 32)
 
 [node name="Held Stack" type="AspectRatioContainer"]

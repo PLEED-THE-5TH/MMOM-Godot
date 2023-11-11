@@ -12,6 +12,6 @@ func _input(event: InputEvent) -> void:
 	if not is_visible_in_tree():
 		return
 	
-	var mouse_move_event = event as InputEventMouseMotion
+	var mouse_move_event: InputEventMouseMotion = event as InputEventMouseMotion
 	if mouse_move_event:
 		position = mouse_move_event.position + mouse_offset

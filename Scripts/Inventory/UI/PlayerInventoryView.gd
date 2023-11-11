@@ -17,7 +17,7 @@ func _ready() -> void:
 	
 	# if anything causes the aspect ratio container to change size/location,
 	# reset it to where it should be
-	aspect_ratio_container.item_rect_changed.connect(func(): call_deferred("_correct_container_position"))
+	aspect_ratio_container.item_rect_changed.connect(func() -> void: call_deferred("_correct_container_position"))
 
 func _gui_input(event: InputEvent) -> void:
 	var mouse_button_event: InputEventMouseButton = event as InputEventMouseButton

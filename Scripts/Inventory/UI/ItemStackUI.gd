@@ -25,5 +25,5 @@ func update() -> void:
 	if not is_visible_in_tree():
 		return
 	
-	icon.texture = null if item_stack.is_empty() else item_stack.item.get_icon() 
+	icon.texture = null if item_stack.is_empty() else item_stack.item.icon 
 	stack_size.text = str(item_stack.size) if (item_stack.size > 0 and item_stack.item.max_stack_size > 1) else ""

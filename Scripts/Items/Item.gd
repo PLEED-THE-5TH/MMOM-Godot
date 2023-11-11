@@ -4,18 +4,15 @@
 
 class_name Item
 
-var item_type: String:
+var name: String:
 	get:
-		return item_type
+		return name
 var max_stack_size: int:
 	get:
 		return max_stack_size
 var description: String:
 	get:
 		return description
-var icon_resource: ResourceManager.ManagedResource:
+var icon: Texture2D:
 	get:
-		return icon_resource
-
-func get_icon() -> Texture2D:
-	return icon_resource.get_value()
+		return icon

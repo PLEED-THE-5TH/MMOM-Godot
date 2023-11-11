@@ -1,5 +1,7 @@
 class_name Inventory
 
+var inventory_scene: PackedScene = preload("res://Scenes/Templates/Inventory/Inventory.tscn")
+
 var max_stacks: int:
 	get:
 		return max_stacks
@@ -13,7 +15,7 @@ func _init(init_max_stacks: int, ui_aspect_ratio: float, ui_scale: float) -> voi
 	for index in range(max_stacks):
 		stacks.append(ItemStack.new())
 	
-	ResourceManager.inventory_scene.get_value().instantiate().init(self, ui_aspect_ratio, ui_scale)
+	inventory_scene.instantiate().init(self, ui_aspect_ratio, ui_scale)
 
 func auto_add(new_item_stack: ItemStack) -> void:
 	for item_stack in stacks:

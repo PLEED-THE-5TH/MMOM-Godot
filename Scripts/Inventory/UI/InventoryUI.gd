@@ -2,6 +2,8 @@ extends AspectRatioContainer
 
 class_name InventoryUI
 
+var inventory_slot_scene: PackedScene = preload("res://Scenes/Templates/Inventory/Inventory Slot.tscn")
+
 func init(inventory: Inventory, target_aspect_ratio: float, grid_scale: float) -> void:
 	var slot_grid: GridContainer = $"Slot Grid"
 	
@@ -14,21 +16,21 @@ func init(inventory: Inventory, target_aspect_ratio: float, grid_scale: float) -
 	size = Vector2(grid_dimensions) * grid_scale
 	
 	for index in range(inventory.max_stacks):
-		var item_slot: InventorySlot = ResourceManager.item_slot_scene.get_value().instantiate()
-		item_slot.init(inventory.stacks[index])
-		item_slot.name = "Slot " + str(index)
-		slot_grid.add_child(item_slot)
+		var inventory_slot: InventorySlot = inventory_slot_scene.instantiate()
+		inventory_slot.init(inventory.stacks[index])
+		inventory_slot.name = "Slot " + str(index)
+		slot_grid.add_child(inventory_slot)
 
-static func _get_aspect_ratio(dimensions: Vector2i):
+static func _get_aspect_ratio(dimensions: Vector2i) -> float:
 	return float(dimensions.x) / float(dimensions.y)
 
 static func _get_grid_dimensions(target_aspect_ratio: float, total_slots: int) -> Vector2i:
-	var best = {
+	var best: Dictionary = {
 		"dimensions": Vector2i.ZERO,
 		"aspect_ratio_diff": INF
 	}
 	
-	var set_best = func(cols: int, rows: int) -> void:
+	var set_best: Callable = func(cols: int, rows: int) -> void:
 		var dimensions: Vector2i = Vector2i(cols, rows)
 		var dimensions_ratio: float = _get_aspect_ratio(dimensions)
 		var aspect_ratio_diff: float = max(target_aspect_ratio, dimensions_ratio) / min(target_aspect_ratio, dimensions_ratio)
@@ -41,7 +43,7 @@ static func _get_grid_dimensions(target_aspect_ratio: float, total_slots: int) -
 			continue
 		
 		@warning_ignore("integer_division")
-		var rows = total_slots / cols
+		var rows: int = total_slots / cols
 		set_best.call(rows, cols)
 		set_best.call(cols, rows)
 	
