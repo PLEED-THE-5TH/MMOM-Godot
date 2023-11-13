@@ -1,11 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://dl2kyphtpb200"]
+[gd_scene load_steps=7 format=3 uid="uid://dl2kyphtpb200"]
 
 [ext_resource type="Script" path="res://Scripts/Inventory/UI/PlayerInventoryUI.gd" id="1_wojp1"]
 [ext_resource type="Script" path="res://Scripts/Inventory/UI/PlayerInventoryView.gd" id="2_u0q1v"]
 [ext_resource type="PackedScene" uid="uid://dnem4mqkftmro" path="res://Scenes/Templates/Inventory/Inventory Slot.tscn" id="2_xbca6"]
 [ext_resource type="Script" path="res://Scripts/Inventory/RestrictedInventorySlot.gd" id="3_7e5fo"]
+[ext_resource type="PackedScene" uid="uid://b1eqel0tasuyo" path="res://Scenes/Templates/Inventory/Inventory.tscn" id="5_3oush"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_nhplf"]
+line_spacing = 0.0
 font_size = 20
 
 [node name="Player Inventory" type="VBoxContainer"]
@@ -103,11 +105,13 @@ layout_mode = 2
 
 [node name="Name" type="Label" parent="Top/Info Tabs/Item Info/MarginContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 0
 label_settings = SubResource("LabelSettings_nhplf")
 vertical_alignment = 1
 
 [node name="HSeparator" type="HSeparator" parent="Top/Info Tabs/Item Info/MarginContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 0
 
 [node name="Description" type="RichTextLabel" parent="Top/Info Tabs/Item Info/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -130,19 +134,13 @@ layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("2_u0q1v")
 
-[node name="Aspect Ratio Container" type="AspectRatioContainer" parent="Bottom/Inventory View"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-stretch_mode = 0
-alignment_vertical = 0
-
-[node name="Slot Grid" type="GridContainer" parent="Bottom/Inventory View/Aspect Ratio Container"]
-layout_mode = 2
+[node name="Slot Grid" parent="Bottom/Inventory View" instance=ExtResource("5_3oush")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 1
 
 [node name="Scroll Bar" type="VScrollBar" parent="Bottom"]
 custom_minimum_size = Vector2(10, 0)

@@ -2,7 +2,7 @@ extends Node
 
 class_name ItemStackDropManager
 
-@onready var item_stack_drop_scene: PackedScene = preload("res://Scenes/Templates/Item Stack Drop.tscn")
+var item_stack_drop_scene: PackedScene = preload("res://Scenes/Templates/Item Stack Drop.tscn")
 
 static var singleton: ItemStackDropManager
 

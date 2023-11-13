@@ -10,13 +10,9 @@ var held_stack_scene: PackedScene = preload("res://Scenes/Templates/Inventory/He
 @export var movement_speed: float = 5
 @export var gravity: float = -1
 
-static var singleton: Player:
-	get:
-		return singleton
+static var singleton: Player
 		
-var inventory: PlayerInventory:
-	get:
-		return inventory
+var inventory: PlayerInventory
 
 static var held_stack: ItemStack = ItemStack.new()
 
@@ -25,7 +21,7 @@ func _ready() -> void:
 	
 	held_stack_scene.instantiate().init(held_stack)
 	
-	inventory = PlayerInventory.new(10 * 9, 12)
+	inventory = PlayerInventory.new(12 * 8, 12)
 	
 	var apple: Apple = Apple.new()
 	var book: Book = Book.new()
@@ -47,9 +43,8 @@ func _handle_inputs() -> void:
 	if Input.is_action_just_pressed("Drop"):
 		if held_stack.is_empty():
 			var hover_slot: InventorySlot = inventory.ui.hover_slot
-			var hover_stack: ItemStack = hover_slot.item_stack_ui.item_stack
-			if hover_slot and not hover_stack.is_empty():
-				hover_stack.drop()
+			if hover_slot:
+				hover_slot.item_stack_ui.item_stack.drop()
 		else:
 			held_stack.drop()
 	

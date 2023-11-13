@@ -2,9 +2,7 @@ extends AspectRatioContainer
 
 class_name InventorySlot
 
-var item_stack_ui: ItemStackUI:
-	get:
-		return item_stack_ui
+var item_stack_ui: ItemStackUI
 
 func init(item_stack: ItemStack) -> void:
 	item_stack_ui = $"Item Stack"

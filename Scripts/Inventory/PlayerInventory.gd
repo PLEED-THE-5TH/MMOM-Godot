@@ -4,9 +4,7 @@ class_name PlayerInventory
 
 var player_inventory_scene: PackedScene = preload("res://Scenes/Templates/Inventory/Player Inventory.tscn")
 
-var ui: PlayerInventoryUI:
-	get:
-		return ui
+var ui: PlayerInventoryUI
 
 func _init(init_max_stacks: int, ui_columns: int) -> void:
 	max_stacks = init_max_stacks

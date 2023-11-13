@@ -2,9 +2,7 @@ extends Control
 
 class_name InventoryManager
 
-static var singleton: InventoryManager:
-	get:
-		return singleton
+static var singleton: InventoryManager
 
 func _ready() -> void:
 	singleton = self

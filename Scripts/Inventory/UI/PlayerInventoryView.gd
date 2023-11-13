@@ -1,23 +1,13 @@
 extends Control
 
-var scroll_sensitivity: float = 5
+@export var scroll_sensitivity: float = 5
 
-@onready var scroll_bar: VScrollBar = $"../Scroll Bar":
-	get:
-		return scroll_bar
-@onready var aspect_ratio_container: AspectRatioContainer = $"Aspect Ratio Container":
-	get:
-		return aspect_ratio_container
-@onready var slot_grid: GridContainer = $"Aspect Ratio Container/Slot Grid":
-	get:
-		return slot_grid
+@onready var scroll_bar: VScrollBar = $"../Scroll Bar"
+@onready var slot_grid: InventoryUI = $"Slot Grid"
 
 func _ready() -> void:
 	scroll_bar.value_changed.connect(_handle_scroll)
-	
-	# if anything causes the aspect ratio container to change size/location,
-	# reset it to where it should be
-	aspect_ratio_container.item_rect_changed.connect(func() -> void: call_deferred("_correct_container_position"))
+	resized.connect(_resize_slot_grid)
 
 func _gui_input(event: InputEvent) -> void:
 	var mouse_button_event: InputEventMouseButton = event as InputEventMouseButton
@@ -32,7 +22,13 @@ func _gui_input(event: InputEvent) -> void:
 			scroll_bar.value -= scroll_sensitivity
 
 func _handle_scroll(_new_value: float) -> void:
-	_correct_container_position()
-	
-func _correct_container_position() -> void:
-	aspect_ratio_container.position.y = (aspect_ratio_container.size.y - slot_grid.size.y - scroll_bar.page) * scroll_bar.value / scroll_bar.max_value
+	var scroll_progress: float = scroll_bar.value / (scroll_bar.max_value - scroll_bar.page)
+	var full_scroll_offset: float = size.y - slot_grid.size.y
+	slot_grid.position.y = full_scroll_offset * scroll_progress
+
+func _resize_slot_grid() -> void:
+	@warning_ignore("integer_division")
+	var rows: int = slot_grid.get_child_count() / slot_grid.columns
+	var single_slot_size: float = size.x / slot_grid.columns
+	slot_grid.size = Vector2(slot_grid.columns, rows) * single_slot_size
+	_handle_scroll(0)

@@ -8,6 +8,9 @@
 collision_layer = 256
 collision_mask = 2
 script = ExtResource("1_laokj")
+gravity = null
+ground_friction = null
+air_friction = null
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_wi8s7")

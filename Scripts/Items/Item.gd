@@ -4,15 +4,7 @@
 
 class_name Item
 
-var name: String:
-	get:
-		return name
-var max_stack_size: int:
-	get:
-		return max_stack_size
-var description: String:
-	get:
-		return description
-var icon: Texture2D:
-	get:
-		return icon
+var name: String
+var max_stack_size: int
+var description: String
+var icon: Texture2D

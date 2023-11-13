@@ -2,12 +2,8 @@ class_name Inventory
 
 var inventory_scene: PackedScene = preload("res://Scenes/Templates/Inventory/Inventory.tscn")
 
-var max_stacks: int:
-	get:
-		return max_stacks
-var stacks: Array[ItemStack] = []:
-	get:
-		return stacks
+var max_stacks: int
+var stacks: Array[ItemStack] = []
 
 func _init(init_max_stacks: int, ui_aspect_ratio: float, ui_scale: float) -> void:
 	max_stacks = init_max_stacks

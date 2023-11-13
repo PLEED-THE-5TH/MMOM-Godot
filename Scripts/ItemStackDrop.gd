@@ -10,13 +10,7 @@ class_name ItemStackDrop
 @export var ground_friction: float = 20
 @export var air_friction: float = 15
 
-var item_stack: ItemStack:
-	get:
-		return item_stack
-
-var can_pickup: bool:
-	get:
-		return timer.time_left <= 0
+var item_stack: ItemStack
 
 func init(init_item_stack: ItemStack) -> void:
 	item_stack = init_item_stack
@@ -41,7 +35,7 @@ func _process(delta: float) -> void:
 	move_and_slide()
 
 func _check_pickup() -> void:
-	if not can_pickup:
+	if timer.time_left > 0:
 		return
 	
 	if not pickup_area.overlaps_body(Player.singleton):

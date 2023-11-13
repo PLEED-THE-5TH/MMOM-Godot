@@ -2,9 +2,7 @@ extends InventorySlot
 
 class_name RestrictedInventorySlot
 
-var restrict_type: Variant:
-	get:
-		return restrict_type
+var restrict_type: Variant
 
 func init(item_stack: ItemStack, init_restrict_type: Variant = Item) -> void:
 	super(item_stack)

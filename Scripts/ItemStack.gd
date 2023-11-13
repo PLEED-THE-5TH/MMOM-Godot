@@ -1,12 +1,7 @@
 class_name ItemStack
 
-var item: Item:
-	get:
-		return item
-		
-var size: int = 0:
-	get:
-		return size
+var item: Item
+var size: int = 0
 
 signal changed()
 
@@ -95,6 +90,9 @@ func empty() -> void:
 	changed.emit()
 
 func drop() -> ItemStackDrop:
+	if is_empty():
+		return null
+	
 	var stack_drop: ItemStackDrop = ItemStackDropManager.create_drop(clone())
 	empty()
 	return stack_drop

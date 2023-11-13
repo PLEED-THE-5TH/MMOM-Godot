@@ -2,12 +2,12 @@
 
 [ext_resource type="Script" path="res://Scripts/Inventory/UI/InventoryUI.gd" id="1_wi8mu"]
 
-[node name="Inventory" type="AspectRatioContainer"]
+[node name="Inventory" type="GridContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-stretch_mode = 0
-alignment_vertical = 0
 script = ExtResource("1_wi8mu")
-
-[node name="Slot Grid" type="GridContainer" parent="."]
-layout_mode = 2

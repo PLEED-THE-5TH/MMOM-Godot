@@ -2,15 +2,9 @@ extends AspectRatioContainer
 
 class_name ItemStackUI
 
-var item_stack: ItemStack:
-	get:
-		return item_stack
-var icon: TextureRect:
-	get:
-		return icon
-var stack_size: Label:
-	get:
-		return stack_size
+var item_stack: ItemStack
+var icon: TextureRect
+var stack_size: Label
 
 func init(init_item_stack: ItemStack) -> void:
 	icon = $"Icon"
