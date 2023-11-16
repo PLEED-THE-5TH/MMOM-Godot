@@ -1,34 +1,26 @@
-[gd_scene load_steps=4 format=3 uid="uid://cdwgqxy54y8kl"]
+[gd_scene load_steps=3 format=3 uid="uid://bvuiqopa058t6"]
 
-[ext_resource type="Script" path="res://Scripts/Inventory/UI/ItemStackUI.gd" id="1_7v87u"]
-[ext_resource type="Texture2D" uid="uid://ci4njsnpqq81a" path="res://Textures/Item Icons/Item Icons.png" id="2_qlwnp"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_0b5tg"]
-atlas = ExtResource("2_qlwnp")
-region = Rect2(480, 0, 32, 32)
+[ext_resource type="Script" path="res://Scripts/Inventory/UI/ItemStackUI.gd" id="1_nk7g1"]
+[ext_resource type="Texture2D" uid="uid://cqxi8qi61pjkt" path="res://Textures/Item Icons/Apple.tres" id="1_s5jyj"]
 
 [node name="Item Stack" type="AspectRatioContainer"]
-anchors_preset = -1
-anchor_right = 0.027
-anchor_bottom = 0.047
-offset_right = -0.400002
-offset_bottom = 0.274998
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-script = ExtResource("1_7v87u")
+script = ExtResource("1_nk7g1")
 
 [node name="Icon" type="TextureRect" parent="."]
-texture_filter = 1
+texture_filter = 3
 layout_mode = 2
-texture = SubResource("AtlasTexture_0b5tg")
+texture = ExtResource("1_s5jyj")
 expand_mode = 1
-stretch_mode = 4
+stretch_mode = 5
 
-[node name="Size" type="Label" parent="."]
-z_index = 1
+[node name="Stack Size" type="Label" parent="."]
 layout_mode = 2
-size_flags_vertical = 1
+size_flags_horizontal = 8
+size_flags_vertical = 8
 horizontal_alignment = 2
 vertical_alignment = 2

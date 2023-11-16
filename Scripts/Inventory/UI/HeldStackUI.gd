@@ -1,17 +1,13 @@
 extends ItemStackUI
 
-var mouse_offset: Vector2
+@export var mouse_offset: Vector2 = Vector2(10, 10)
 
-func init(init_item_stack: ItemStack, init_mouse_offset: Vector2 = Vector2(10, 10)) -> void:
-	super(init_item_stack)
-	mouse_offset = init_mouse_offset
-	
-	InventoryManager.singleton.add_child(self)
+func _ready() -> void:
+	init(ItemStack.new())
 
 func _input(event: InputEvent) -> void:
-	if not is_visible_in_tree():
+	var mouse_move_event: InputEventMouseMotion = event as InputEventMouseMotion
+	if not mouse_move_event:
 		return
 	
-	var mouse_move_event: InputEventMouseMotion = event as InputEventMouseMotion
-	if mouse_move_event:
-		position = mouse_move_event.position + mouse_offset
+	position = mouse_move_event.position + mouse_offset

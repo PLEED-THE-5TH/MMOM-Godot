@@ -1,9 +1,9 @@
 extends Camera3D
 
-@onready var focus_point: Node3D = $"../../CameraFocusPoint"
+@onready var focus_point: Node3D = $"../../Camera Focus Point"
 
 func _input(event: InputEvent) -> void:
-	if InventoryManager.inventories_visible():
+	if InventoryUIManager.singleton.visible:
 		return
 	
 	var motion_event: InputEventMouseMotion = event as InputEventMouseMotion

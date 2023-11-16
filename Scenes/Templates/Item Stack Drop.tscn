@@ -4,7 +4,7 @@
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_wi8s7"]
 
-[node name="ItemStackDrop" type="CharacterBody3D"]
+[node name="Item Stack Drop" type="CharacterBody3D"]
 collision_layer = 256
 collision_mask = 2
 script = ExtResource("1_laokj")
@@ -12,15 +12,15 @@ gravity = null
 ground_friction = null
 air_friction = null
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="Hitbox" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_wi8s7")
 
 [node name="Sprite" type="Sprite3D" parent="."]
 texture_filter = 2
 
-[node name="PickupArea" type="Area3D" parent="."]
+[node name="Pickup Area" type="Area3D" parent="."]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="PickupArea"]
+[node name="Pickup Hitbox" type="CollisionShape3D" parent="Pickup Area"]
 shape = SubResource("SphereShape3D_wi8s7")
 
 [node name="Timer" type="Timer" parent="."]

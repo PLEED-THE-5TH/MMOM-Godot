@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://4yue8105ia4m"]
 
-[ext_resource type="Script" path="res://Scripts/Inventory/InventoryManager.gd" id="1_326e8"]
+[ext_resource type="PackedScene" uid="uid://chhpuwlrxonpw" path="res://Scenes/Templates/Inventory/Inventory UI Manager.tscn" id="1_okxwn"]
 [ext_resource type="PackedScene" uid="uid://7xcumaunp6y1" path="res://Scenes/Templates/Player.tscn" id="2_bvrwv"]
 [ext_resource type="Script" path="res://Scripts/ItemStackDropManager.gd" id="3_ck2aw"]
 
@@ -28,21 +28,16 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Inventories" type="Control" parent="UI"]
-visible = false
+[node name="Inventory UI Manager" parent="UI" instance=ExtResource("1_okxwn")]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("1_326e8")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="Directional Light" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.984808, -0.133022, -0.111619, 0, -0.642788, 0.766045, -0.173648, -0.754407, -0.633022, 0, 0, 0)
 
 [node name="Player" parent="." instance=ExtResource("2_bvrwv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+movement_speed = 5.0
+gravity = -1.0
 
 [node name="Ground" type="Node3D" parent="."]
 transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
@@ -70,5 +65,5 @@ shape = SubResource("BoxShape3D_mt4g6")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Ground2"]
 mesh = SubResource("PlaneMesh_iggrk")
 
-[node name="ItemStackDrops" type="Node" parent="."]
+[node name="Item Stack Drops" type="Node" parent="."]
 script = ExtResource("3_ck2aw")

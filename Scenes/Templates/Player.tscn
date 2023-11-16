@@ -16,11 +16,11 @@ gravity = null
 [node name="Body" type="MeshInstance3D" parent="."]
 mesh = SubResource("CapsuleMesh_0chg3")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="Hitbox" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_w4wf5")
 
-[node name="CameraFocusPoint" type="Node3D" parent="."]
+[node name="Camera Focus Point" type="Node3D" parent="."]
 
-[node name="Camera" type="Camera3D" parent="CameraFocusPoint"]
+[node name="Camera" type="Camera3D" parent="Camera Focus Point"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 4)
 script = ExtResource("2_cmpqx")

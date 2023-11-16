@@ -1,11 +1,14 @@
 extends AspectRatioContainer
 
-class_name InventorySlot
+class_name InventorySlotUI
 
 var item_stack_ui: ItemStackUI
 
 func init(item_stack: ItemStack) -> void:
 	item_stack_ui = $"Item Stack"
+	for child in get_children():
+		print(child)
+	print(get_node("Item Stack"))
 	item_stack_ui.init(item_stack)
 
 func _gui_input(event: InputEvent) -> void:
@@ -21,8 +24,8 @@ func _gui_input(event: InputEvent) -> void:
 			_handle_right_click()
 
 func _handle_left_click() -> void:
-	var held_stack: ItemStack = Player.held_stack
-	var item_stack: ItemStack = item_stack_ui.item_stack
+	var item_stack = item_stack_ui.item_stack
+	var held_stack: ItemStack = InventoryUIManager.singleton.held_item_stack_ui.item_stack
 	
 	if held_stack.is_empty():
 		if item_stack.is_empty():
@@ -38,8 +41,8 @@ func _handle_left_click() -> void:
 		item_stack.set_stack(temp)
 
 func _handle_right_click() -> void:
-	var held_stack: ItemStack = Player.held_stack
-	var item_stack: ItemStack = item_stack_ui.item_stack
+	var item_stack = item_stack_ui.item_stack
+	var held_stack: ItemStack = InventoryUIManager.singleton.held_item_stack_ui.item_stack
 	
 	if held_stack.is_empty():
 		@warning_ignore("integer_division")

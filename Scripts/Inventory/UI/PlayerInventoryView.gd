@@ -3,9 +3,9 @@ extends Control
 @export var scroll_sensitivity: float = 5
 
 @onready var scroll_bar: VScrollBar = $"../Scroll Bar"
-@onready var slot_grid: InventoryUI = $"Slot Grid"
+@onready var slot_grid: InventorySlotGridUI = $"Inventory Slot Grid"
 
-func _ready() -> void:
+func init() -> void:
 	scroll_bar.value_changed.connect(_handle_scroll)
 	resized.connect(_resize_slot_grid)
 
@@ -28,7 +28,7 @@ func _handle_scroll(_new_value: float) -> void:
 
 func _resize_slot_grid() -> void:
 	@warning_ignore("integer_division")
-	var rows: int = slot_grid.get_child_count() / slot_grid.columns
+	var rows: int = slot_grid.inventory.max_stacks / slot_grid.columns
 	var single_slot_size: float = size.x / slot_grid.columns
 	slot_grid.size = Vector2(slot_grid.columns, rows) * single_slot_size
 	_handle_scroll(0)

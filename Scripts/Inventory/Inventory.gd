@@ -1,17 +1,19 @@
 class_name Inventory
 
-var inventory_scene: PackedScene = preload("res://Scenes/Templates/Inventory/Inventory.tscn")
+var inventory_scene: PackedScene = preload("res://Scenes/Templates/Inventory/Inventory Slot Grid.tscn")
 
-var max_stacks: int
 var stacks: Array[ItemStack] = []
+var owner: Node3D
+var ui: InventorySlotGridUI
 
-func _init(init_max_stacks: int, ui_aspect_ratio: float, ui_scale: float) -> void:
-	max_stacks = init_max_stacks
+func _init(num_stacks: int, num_columns: int, inventory_owner: Node3D) -> void:
+	owner = inventory_owner
 	
-	for index in range(max_stacks):
+	for index in range(num_stacks):
 		stacks.append(ItemStack.new())
 	
-	inventory_scene.instantiate().init(self, ui_aspect_ratio, ui_scale)
+	ui = inventory_scene.instantiate()
+	ui.init(self, num_columns)
 
 func auto_add(new_item_stack: ItemStack) -> void:
 	for item_stack in stacks:
