@@ -2,10 +2,9 @@ extends AspectRatioContainer
 
 class_name InventorySlotUI
 
-var item_stack_ui: ItemStackUI
+@onready var item_stack_ui: ItemStackUI = $"Item Stack"
 
 func init(item_stack: ItemStack) -> void:
-	item_stack_ui = $"Item Stack"
 	for child in get_children():
 		print(child)
 	print(get_node("Item Stack"))
