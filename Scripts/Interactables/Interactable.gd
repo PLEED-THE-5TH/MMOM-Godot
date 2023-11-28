@@ -23,6 +23,6 @@ func try_interact() -> bool:
 	interact()
 	return true
 
-# If redefined in the child class, call super() to keep functionality
+# If redefined in the child class, call super() (usually at the end) to keep functionality
 func _ready() -> void:
 	InteractableManager.add_interactable(self)

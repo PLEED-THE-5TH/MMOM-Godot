@@ -8,112 +8,119 @@
 [sub_resource type="LabelSettings" id="LabelSettings_t4ef5"]
 line_spacing = 0.0
 
-[node name="Player Inventory" type="VBoxContainer"]
+[node name="Player Inventory" type="MarginContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
 script = ExtResource("1_fh4al")
 
-[node name="Top" type="HBoxContainer" parent="."]
+[node name="Sections" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Top" type="HBoxContainer" parent="Sections"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Equipment" type="HBoxContainer" parent="Top"]
+[node name="Equipment" type="HBoxContainer" parent="Sections/Top"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Armor Slots" type="VBoxContainer" parent="Top/Equipment"]
+[node name="Armor Slots" type="VBoxContainer" parent="Sections/Top/Equipment"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Helmet Slot" parent="Top/Equipment/Armor Slots" instance=ExtResource("1_wyqtq")]
+[node name="Helmet Slot" parent="Sections/Top/Equipment/Armor Slots" instance=ExtResource("1_wyqtq")]
 layout_mode = 2
 script = ExtResource("2_f1awe")
 
-[node name="Chestplate Slot" parent="Top/Equipment/Armor Slots" instance=ExtResource("1_wyqtq")]
+[node name="Chestplate Slot" parent="Sections/Top/Equipment/Armor Slots" instance=ExtResource("1_wyqtq")]
 layout_mode = 2
 script = ExtResource("2_f1awe")
 
-[node name="Leggings Slot" parent="Top/Equipment/Armor Slots" instance=ExtResource("1_wyqtq")]
+[node name="Leggings Slot" parent="Sections/Top/Equipment/Armor Slots" instance=ExtResource("1_wyqtq")]
 layout_mode = 2
 script = ExtResource("2_f1awe")
 
-[node name="Boots Slot" parent="Top/Equipment/Armor Slots" instance=ExtResource("1_wyqtq")]
+[node name="Boots Slot" parent="Sections/Top/Equipment/Armor Slots" instance=ExtResource("1_wyqtq")]
 layout_mode = 2
 script = ExtResource("2_f1awe")
 
-[node name="Player Preview" type="Control" parent="Top/Equipment"]
+[node name="Player Preview" type="Control" parent="Sections/Top/Equipment"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Tool Slots" type="VBoxContainer" parent="Top/Equipment"]
+[node name="Tool Slots" type="VBoxContainer" parent="Sections/Top/Equipment"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Mining Tool Slot" parent="Top/Equipment/Tool Slots" instance=ExtResource("1_wyqtq")]
+[node name="Mining Tool Slot" parent="Sections/Top/Equipment/Tool Slots" instance=ExtResource("1_wyqtq")]
 layout_mode = 2
 script = ExtResource("2_f1awe")
 
-[node name="Weapon Slot" parent="Top/Equipment/Tool Slots" instance=ExtResource("1_wyqtq")]
+[node name="Weapon Slot" parent="Sections/Top/Equipment/Tool Slots" instance=ExtResource("1_wyqtq")]
 layout_mode = 2
 script = ExtResource("2_f1awe")
 
-[node name="Accessory Slots" type="HBoxContainer" parent="Top/Equipment/Tool Slots"]
+[node name="Accessory Slots" type="HBoxContainer" parent="Sections/Top/Equipment/Tool Slots"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Accessory 1 Slot" parent="Top/Equipment/Tool Slots/Accessory Slots" instance=ExtResource("1_wyqtq")]
+[node name="Accessory 1 Slot" parent="Sections/Top/Equipment/Tool Slots/Accessory Slots" instance=ExtResource("1_wyqtq")]
 layout_mode = 2
 script = ExtResource("2_f1awe")
 
-[node name="Accessory 2 Slot" parent="Top/Equipment/Tool Slots/Accessory Slots" instance=ExtResource("1_wyqtq")]
+[node name="Accessory 2 Slot" parent="Sections/Top/Equipment/Tool Slots/Accessory Slots" instance=ExtResource("1_wyqtq")]
 layout_mode = 2
 script = ExtResource("2_f1awe")
 
-[node name="Info Tabs" type="TabContainer" parent="Top"]
+[node name="Info Tabs" type="TabContainer" parent="Sections/Top"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Item Info" type="MarginContainer" parent="Top/Info Tabs"]
+[node name="Item Info" type="MarginContainer" parent="Sections/Top/Info Tabs"]
 layout_mode = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="Tab Elements" type="VBoxContainer" parent="Top/Info Tabs/Item Info"]
+[node name="Tab Elements" type="VBoxContainer" parent="Sections/Top/Info Tabs/Item Info"]
 layout_mode = 2
 
-[node name="Item Name" type="Label" parent="Top/Info Tabs/Item Info/Tab Elements"]
+[node name="Item Name" type="Label" parent="Sections/Top/Info Tabs/Item Info/Tab Elements"]
 layout_mode = 2
 size_flags_vertical = 1
 label_settings = SubResource("LabelSettings_t4ef5")
 vertical_alignment = 2
 
-[node name="Separator" type="HSeparator" parent="Top/Info Tabs/Item Info/Tab Elements"]
+[node name="Separator" type="HSeparator" parent="Sections/Top/Info Tabs/Item Info/Tab Elements"]
 layout_mode = 2
 
-[node name="Item Description" type="RichTextLabel" parent="Top/Info Tabs/Item Info/Tab Elements"]
+[node name="Item Description" type="RichTextLabel" parent="Sections/Top/Info Tabs/Item Info/Tab Elements"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Other Tab" type="Control" parent="Top/Info Tabs"]
+[node name="Other Tab" type="Control" parent="Sections/Top/Info Tabs"]
 visible = false
 layout_mode = 2
 
-[node name="Bottom" type="HBoxContainer" parent="."]
+[node name="Bottom" type="HBoxContainer" parent="Sections"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Slot Grid View" type="Control" parent="Bottom"]
+[node name="Slot Grid View" type="Control" parent="Sections/Bottom"]
 clip_children = 1
 clip_contents = true
 layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("3_kqshj")
 
-[node name="Scroll Bar" type="VScrollBar" parent="Bottom"]
+[node name="Scroll Bar" type="VScrollBar" parent="Sections/Bottom"]
 layout_mode = 2
 page = 30.0

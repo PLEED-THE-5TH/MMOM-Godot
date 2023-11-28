@@ -4,7 +4,7 @@ class_name ItemStackDrop
 
 @onready var sprite: Sprite3D = $"Sprite"
 @onready var timer: Timer = $"Timer"
-@onready var pickup_area: Area3D = $"PickupArea"
+@onready var pickup_area: Area3D = $"Pickup Area"
 
 @export var gravity: float = -1
 @export var ground_friction: float = 20

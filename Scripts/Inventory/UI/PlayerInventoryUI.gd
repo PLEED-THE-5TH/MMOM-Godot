@@ -11,25 +11,31 @@ var item_description_label: RichTextLabel
 func _ready() -> void:
 	singleton = self
 	
-	item_name_label = $"Top/Info Tabs/Item Info/Tab Elements/Item Name"
-	item_description_label = $"Top/Info Tabs/Item Info/Tab Elements/Item Description"
+	var item_info_elements: Control = $"Sections/Top/Info Tabs/Item Info/Tab Elements"
+	item_name_label = item_info_elements.get_node("Item Name")
+	item_description_label = item_info_elements.get_node("Item Description")
 
 func init(inventory: Inventory) -> void:
 	inventory.ui.name = "Inventory Slot Grid"
-	$"Bottom/Slot Grid View".add_child(inventory.ui)
-	$"Bottom/Slot Grid View".init()
+	var slot_grid_view: PlayerInventorySlotGridViewUI = $"Sections/Bottom/Slot Grid View"
+	slot_grid_view.add_child(inventory.ui)
+	slot_grid_view.init()
 	inventory.ui.position.x = 0
 	
+	var equipment: Control = $"Sections/Top/Equipment"
+	var armor_slots: Control = equipment.get_node("Armor Slots")
+	var tool_slots: Control = equipment.get_node("Tool Slots")
+	var accessory_slots: Control = tool_slots.get_node("Accessory Slots")
 	var restricted_slot_types: Dictionary = {
-		$"Top/Equipment/Armor Slots/Helmet Slot": Helmet,
-		$"Top/Equipment/Armor Slots/Chestplate Slot": Chestplate,
-		$"Top/Equipment/Armor Slots/Leggings Slot": Leggings,
-		$"Top/Equipment/Armor Slots/Boots Slot": Boots,
-		$"Top/Equipment/Tool Slots/Mining Tool Slot": MiningTool,
-		$"Top/Equipment/Tool Slots/Weapon Slot": Weapon,
-		$"Top/Equipment/Tool Slots/Accessory Slots/Accessory 1 Slot": Accessory,
-		$"Top/Equipment/Tool Slots/Accessory Slots/Accessory 2 Slot": Accessory
+		armor_slots.get_node("Helmet Slot"): Helmet,
+		armor_slots.get_node("Chestplate Slot"): Chestplate,
+		armor_slots.get_node("Leggings Slot"): Leggings,
+		armor_slots.get_node("Boots Slot"): Boots,
+		tool_slots.get_node("Mining Tool Slot"): MiningTool,
+		tool_slots.get_node("Weapon Slot"): Weapon,
+		accessory_slots.get_node("Accessory 1 Slot"): Accessory,
+		accessory_slots.get_node("Accessory 2 Slot"): Accessory
 	}
 	
 	for slot in restricted_slot_types:
-		(slot as RestrictedInventorySlotUI).init(ItemStack.new(), restricted_slot_types[slot])
+		slot.init(ItemStack.new(), restricted_slot_types[slot])

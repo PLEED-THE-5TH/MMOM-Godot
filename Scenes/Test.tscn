@@ -1,8 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://4yue8105ia4m"]
+[gd_scene load_steps=9 format=3 uid="uid://4yue8105ia4m"]
 
-[ext_resource type="PackedScene" uid="uid://chhpuwlrxonpw" path="res://Scenes/Templates/Inventory/Inventory UI Manager.tscn" id="1_okxwn"]
-[ext_resource type="PackedScene" uid="uid://7xcumaunp6y1" path="res://Scenes/Templates/Player.tscn" id="2_bvrwv"]
-[ext_resource type="Script" path="res://Scripts/ItemStackDropManager.gd" id="3_ck2aw"]
+[ext_resource type="PackedScene" uid="uid://chhpuwlrxonpw" path="res://Scenes/Templates/Inventory/Inventory UI Manager.tscn" id="1_13hfx"]
+[ext_resource type="PackedScene" uid="uid://7xcumaunp6y1" path="res://Scenes/Templates/Player.tscn" id="2_3ofo6"]
+[ext_resource type="Script" path="res://Scripts/ItemStackDropManager.gd" id="3_pc8gj"]
+[ext_resource type="PackedScene" uid="uid://dcq6r27kugnn6" path="res://Scenes/Templates/Chest.tscn" id="4_cm6dg"]
+[ext_resource type="Script" path="res://Scripts/Interactables/InteractableManager.gd" id="5_rs5w5"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_mt4g6"]
 size = Vector3(1, 0, 1)
@@ -28,13 +30,20 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Inventory UI Manager" parent="UI" instance=ExtResource("1_okxwn")]
+[node name="Inventory UI Manager" parent="UI" instance=ExtResource("1_13hfx")]
+visible = false
 layout_mode = 1
+
+[node name="Interactable Manager" type="Node" parent="."]
+script = ExtResource("5_rs5w5")
+
+[node name="Item Stack Drops" type="Node" parent="."]
+script = ExtResource("3_pc8gj")
 
 [node name="Directional Light" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.984808, -0.133022, -0.111619, 0, -0.642788, 0.766045, -0.173648, -0.754407, -0.633022, 0, 0, 0)
 
-[node name="Player" parent="." instance=ExtResource("2_bvrwv")]
+[node name="Player" parent="." instance=ExtResource("2_3ofo6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="Ground" type="Node3D" parent="."]
@@ -61,7 +70,8 @@ collision_mask = 0
 shape = SubResource("BoxShape3D_mt4g6")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Ground2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.202391, -8.84679e-09)
 mesh = SubResource("PlaneMesh_iggrk")
 
-[node name="Item Stack Drops" type="Node" parent="."]
-script = ExtResource("3_ck2aw")
+[node name="Chest" parent="." instance=ExtResource("4_cm6dg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 1, -7)
