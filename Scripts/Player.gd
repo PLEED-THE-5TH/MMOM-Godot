@@ -16,7 +16,7 @@ func _ready() -> void:
 	Player.singleton = self
 	
 	inventory = Inventory.new(12 * 8, 12, self)
-	InventoryUIManager.singleton.player_inventory_slot_grid = inventory.ui
+	PlayerInventoryUI.singleton.init(inventory)
 	
 	var apple: Apple = Apple.new()
 	var book: Book = Book.new()
@@ -39,9 +39,9 @@ func _handle_inputs() -> void:
 	
 	if Input.is_action_just_pressed("Drop"):
 		if held_stack.is_empty():
-			var hover_stack_ui: ItemStackUI = InventoryUIManager.hover_item_stack_ui
-			if hover_stack_ui:
-				hover_stack_ui.item_stack.drop()
+			var hover_stack: ItemStack = InventoryUIManager.hover_item_stack
+			if hover_stack:
+				hover_stack.drop()
 		else:
 			held_stack.drop()
 	
@@ -52,7 +52,7 @@ func _handle_inputs() -> void:
 	_handle_movement()
 
 func _handle_movement() -> void:
-	if InventoryUIManager.visible:
+	if InventoryUIManager.singleton.visible:
 		return
 	
 	var camera_forward: Vector2 = -Vector2(camera.global_transform.basis.z.x, camera.global_transform.basis.z.z)

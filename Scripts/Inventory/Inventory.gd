@@ -1,6 +1,6 @@
 class_name Inventory
 
-var inventory_scene: PackedScene = preload("res://Scenes/Templates/Inventory/Inventory Slot Grid.tscn")
+var inventory_scene: PackedScene = load("res://Scenes/Templates/Inventory/Inventory Slot Grid.tscn")
 
 var stacks: Array[ItemStack] = []
 var owner: Node3D

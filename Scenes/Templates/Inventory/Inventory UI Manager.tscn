@@ -1,12 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://chhpuwlrxonpw"]
+[gd_scene load_steps=5 format=3 uid="uid://chhpuwlrxonpw"]
 
-[ext_resource type="PackedScene" uid="uid://cri6vn5ovqgbi" path="res://Scenes/Templates/Inventory/Inventory Slot.tscn" id="1_6h1iq"]
-[ext_resource type="Script" path="res://Scripts/Inventory/UI/PlayerInventoryView.gd" id="1_74mu5"]
 [ext_resource type="Script" path="res://Scripts/Inventory/UI/InventoryUIManager.gd" id="1_e0wyi"]
-[ext_resource type="Script" path="res://Scripts/Inventory/UI/RestrictedInventorySlotUI.gd" id="2_0wccm"]
 [ext_resource type="PackedScene" uid="uid://bvuiqopa058t6" path="res://Scenes/Templates/Inventory/Item Stack.tscn" id="2_k35nx"]
-[ext_resource type="PackedScene" uid="uid://e3mq8epwjuib" path="res://Scenes/Templates/Inventory/Inventory Slot Grid.tscn" id="2_wpy1g"]
 [ext_resource type="Script" path="res://Scripts/Inventory/UI/HeldStackUI.gd" id="3_a0vvn"]
+[ext_resource type="PackedScene" uid="uid://kg8iih5pl84q" path="res://Scenes/Templates/Inventory/Player Inventory.tscn" id="4_tg0a1"]
 
 [node name="Inventory UI Manager" type="Control"]
 layout_mode = 3
@@ -18,13 +15,17 @@ grow_vertical = 2
 script = ExtResource("1_e0wyi")
 
 [node name="Held Item Stack" parent="." instance=ExtResource("2_k35nx")]
+z_index = 1
 layout_mode = 0
 anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
+offset_right = 1.0
+offset_bottom = 23.0
 grow_horizontal = 1
 grow_vertical = 1
 script = ExtResource("3_a0vvn")
+item_stack_ui_size = Vector2(40, 40)
 mouse_offset = Vector2(10, 10)
 
 [node name="Quadrants" type="GridContainer" parent="."]
@@ -41,120 +42,8 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Player Inventory" type="VBoxContainer" parent="Quadrants/Top Left"]
+[node name="Player Inventory" parent="Quadrants/Top Left" instance=ExtResource("4_tg0a1")]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Top" type="HBoxContainer" parent="Quadrants/Top Left/Player Inventory"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="Equipment" type="HBoxContainer" parent="Quadrants/Top Left/Player Inventory/Top"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Armor Slots" type="VBoxContainer" parent="Quadrants/Top Left/Player Inventory/Top/Equipment"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Helmet Slot" parent="Quadrants/Top Left/Player Inventory/Top/Equipment/Armor Slots" instance=ExtResource("1_6h1iq")]
-layout_mode = 2
-size_flags_vertical = 3
-script = ExtResource("2_0wccm")
-
-[node name="Chestplate Slot" parent="Quadrants/Top Left/Player Inventory/Top/Equipment/Armor Slots" instance=ExtResource("1_6h1iq")]
-layout_mode = 2
-size_flags_vertical = 3
-script = ExtResource("2_0wccm")
-
-[node name="Leggings Slot" parent="Quadrants/Top Left/Player Inventory/Top/Equipment/Armor Slots" instance=ExtResource("1_6h1iq")]
-layout_mode = 2
-size_flags_vertical = 3
-script = ExtResource("2_0wccm")
-
-[node name="Boots Slot" parent="Quadrants/Top Left/Player Inventory/Top/Equipment/Armor Slots" instance=ExtResource("1_6h1iq")]
-layout_mode = 2
-size_flags_vertical = 3
-script = ExtResource("2_0wccm")
-
-[node name="Player Preview" type="Control" parent="Quadrants/Top Left/Player Inventory/Top/Equipment"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Tool Slots" type="VBoxContainer" parent="Quadrants/Top Left/Player Inventory/Top/Equipment"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Mining Tool Slot" parent="Quadrants/Top Left/Player Inventory/Top/Equipment/Tool Slots" instance=ExtResource("1_6h1iq")]
-layout_mode = 2
-size_flags_vertical = 3
-script = ExtResource("2_0wccm")
-
-[node name="Weapon Slot" parent="Quadrants/Top Left/Player Inventory/Top/Equipment/Tool Slots" instance=ExtResource("1_6h1iq")]
-layout_mode = 2
-size_flags_vertical = 3
-script = ExtResource("2_0wccm")
-
-[node name="Accessory Slots" type="HBoxContainer" parent="Quadrants/Top Left/Player Inventory/Top/Equipment/Tool Slots"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="Accessory 1 Slot" parent="Quadrants/Top Left/Player Inventory/Top/Equipment/Tool Slots/Accessory Slots" instance=ExtResource("1_6h1iq")]
-layout_mode = 2
-size_flags_horizontal = 3
-script = ExtResource("2_0wccm")
-
-[node name="Accessory 2 Slot" parent="Quadrants/Top Left/Player Inventory/Top/Equipment/Tool Slots/Accessory Slots" instance=ExtResource("1_6h1iq")]
-layout_mode = 2
-size_flags_horizontal = 3
-script = ExtResource("2_0wccm")
-
-[node name="Info Tabs" type="TabContainer" parent="Quadrants/Top Left/Player Inventory/Top"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Item Info" type="VBoxContainer" parent="Quadrants/Top Left/Player Inventory/Top/Info Tabs"]
-layout_mode = 2
-
-[node name="Item Name" type="Label" parent="Quadrants/Top Left/Player Inventory/Top/Info Tabs/Item Info"]
-layout_mode = 2
-size_flags_vertical = 1
-
-[node name="Separator" type="HSeparator" parent="Quadrants/Top Left/Player Inventory/Top/Info Tabs/Item Info"]
-layout_mode = 2
-
-[node name="Item Description" type="RichTextLabel" parent="Quadrants/Top Left/Player Inventory/Top/Info Tabs/Item Info"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="Other Tab" type="Control" parent="Quadrants/Top Left/Player Inventory/Top/Info Tabs"]
-visible = false
-layout_mode = 2
-
-[node name="Bottom" type="HBoxContainer" parent="Quadrants/Top Left/Player Inventory"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="Slot Grid View" type="Control" parent="Quadrants/Top Left/Player Inventory/Bottom"]
-clip_children = 1
-layout_mode = 2
-size_flags_horizontal = 3
-script = ExtResource("1_74mu5")
-
-[node name="Inventory Slot Grid" parent="Quadrants/Top Left/Player Inventory/Bottom/Slot Grid View" instance=ExtResource("2_wpy1g")]
-layout_mode = 0
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-grow_horizontal = 1
-grow_vertical = 1
-
-[node name="Scroll Bar" type="VScrollBar" parent="Quadrants/Top Left/Player Inventory/Bottom"]
-layout_mode = 2
 
 [node name="Top Right" type="Control" parent="Quadrants"]
 layout_mode = 2

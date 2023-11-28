@@ -1,13 +1,19 @@
 extends Control
 
+class_name PlayerInventorySlotGridViewUI
+
 @export var scroll_sensitivity: float = 5
 
-@onready var scroll_bar: VScrollBar = $"../Scroll Bar"
-@onready var slot_grid: InventorySlotGridUI = $"Inventory Slot Grid"
+var scroll_bar: VScrollBar
+var slot_grid: InventorySlotGridUI
 
 func init() -> void:
+	scroll_bar = $"../Scroll Bar"
+	slot_grid = $"Inventory Slot Grid"
 	scroll_bar.value_changed.connect(_handle_scroll)
 	resized.connect(_resize_slot_grid)
+	
+	slot_grid.set_deferred("position", Vector2.ZERO)
 
 func _gui_input(event: InputEvent) -> void:
 	var mouse_button_event: InputEventMouseButton = event as InputEventMouseButton
@@ -28,7 +34,7 @@ func _handle_scroll(_new_value: float) -> void:
 
 func _resize_slot_grid() -> void:
 	@warning_ignore("integer_division")
-	var rows: int = slot_grid.inventory.max_stacks / slot_grid.columns
+	var rows: int = slot_grid.inventory.stacks.size() / slot_grid.columns
 	var single_slot_size: float = size.x / slot_grid.columns
-	slot_grid.size = Vector2(slot_grid.columns, rows) * single_slot_size
+	slot_grid.set_deferred("size", Vector2(slot_grid.columns, rows) * single_slot_size)
 	_handle_scroll(0)

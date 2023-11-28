@@ -2,15 +2,18 @@ extends AspectRatioContainer
 
 class_name InventorySlotUI
 
-@onready var item_stack_ui: ItemStackUI = $"Item Stack"
+var item_stack_ui: ItemStackUI
 
 func init(item_stack: ItemStack) -> void:
-	for child in get_children():
-		print(child)
-	print(get_node("Item Stack"))
+	item_stack_ui = $"Item Stack"
 	item_stack_ui.init(item_stack)
+	
+	var background: TextureRect = $"Background"
+	background.mouse_entered.connect(_on_mouse_entered)
+	background.mouse_exited.connect(_on_mouse_exited)
+	background.gui_input.connect(_on_gui_input)
 
-func _gui_input(event: InputEvent) -> void:
+func _on_gui_input(event: InputEvent) -> void:
 	var mouse_button_event: InputEventMouseButton = event as InputEventMouseButton
 	
 	if not mouse_button_event or not mouse_button_event.pressed:
@@ -38,6 +41,7 @@ func _handle_left_click() -> void:
 		var temp: ItemStack = held_stack.clone()
 		held_stack.set_stack(item_stack)
 		item_stack.set_stack(temp)
+		InventoryUIManager.update_item_info()
 
 func _handle_right_click() -> void:
 	var item_stack = item_stack_ui.item_stack
@@ -57,3 +61,9 @@ func _handle_right_click() -> void:
 		return
 	
 	held_stack.increment_size(-1)
+
+func _on_mouse_entered() -> void:
+	InventoryUIManager.singleton.hover_item_stack = item_stack_ui.item_stack
+
+func _on_mouse_exited() -> void:
+	InventoryUIManager.singleton.hover_item_stack = null

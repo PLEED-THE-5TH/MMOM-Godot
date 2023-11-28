@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://bvuiqopa058t6"]
+[gd_scene load_steps=2 format=3 uid="uid://bvuiqopa058t6"]
 
 [ext_resource type="Script" path="res://Scripts/Inventory/UI/ItemStackUI.gd" id="1_nk7g1"]
-[ext_resource type="Texture2D" uid="uid://cqxi8qi61pjkt" path="res://Textures/Item Icons/Apple.tres" id="1_s5jyj"]
 
 [node name="Item Stack" type="AspectRatioContainer"]
 anchors_preset = 15
@@ -9,12 +8,13 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("1_nk7g1")
 
 [node name="Icon" type="TextureRect" parent="."]
 texture_filter = 3
 layout_mode = 2
-texture = ExtResource("1_s5jyj")
+mouse_filter = 2
 expand_mode = 1
 stretch_mode = 5
 
