@@ -5,7 +5,7 @@ static var size: Vector3i = Vector3i(16, 16, 16)
 var terrain: DungeonTerrain
 var grid_location: Vector3i
 
-var nodes: Array
+var cells: Array
 
 func _init(init_terrain: DungeonTerrain, init_grid_location: Vector3i) -> void:
 	terrain = init_terrain
@@ -18,4 +18,4 @@ func _init(init_terrain: DungeonTerrain, init_grid_location: Vector3i) -> void:
 			for z in range(size.z):
 				row.append(DungeonCell.new(self, Vector3i(x, y, z)))
 			slice.append(row)
-		nodes.append(slice)
+		cells.append(slice)

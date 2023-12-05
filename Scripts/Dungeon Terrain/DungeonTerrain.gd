@@ -18,17 +18,15 @@ func _init_chunks(x_chunks: int, y_chunks: int, z_chunks: int) -> void:
 		chunks.append(slice)
 
 func _init_meshes(x_chunks: int, y_chunks: int, z_chunks: int) -> void:
-	var width: int = (x_chunks * DungeonChunk.size.x) - 1
-	var height: int = (y_chunks * DungeonChunk.size.y) - 1
-	var depth: int = (z_chunks * DungeonChunk.size.z) - 1
+	var width: int = x_chunks * DungeonChunk.size.x
+	var height: int = y_chunks * DungeonChunk.size.y
+	var depth: int = z_chunks * DungeonChunk.size.z
 	for x in range(width):
 		var slice: Array = []
 		for y in range(height):
 			var row: Array[DungeonMeshCell] = []
 			for z in range(depth):
-				var mesh_node = DungeonMeshCell.new(self, Vector3i(x, y, z))
-				mesh_node.connect_surrounding_nodes()
-				row.append(mesh_node)
+				row.append(DungeonMeshCell.new(self, Vector3i(x, y, z)))
 			slice.append(row)
 		meshes.append(slice)
 
@@ -42,8 +40,8 @@ func get_chunk_from_grid_location(grid_location: Vector3i) -> DungeonChunk:
 		grid_location.z / DungeonChunk.size.z
 	]
 
-func get_node_from_grid_location(grid_location: Vector3i) -> DungeonNode:
-	return get_chunk_from_grid_location(grid_location).nodes[
+func get_cell_from_grid_location(grid_location: Vector3i) -> DungeonCell:
+	return get_chunk_from_grid_location(grid_location).cells[
 		grid_location.x % DungeonChunk.size.x
 	][
 		grid_location.y % DungeonChunk.size.y
