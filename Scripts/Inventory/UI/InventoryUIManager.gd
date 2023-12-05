@@ -12,6 +12,9 @@ static var hover_item_stack: ItemStack:
 		_on_hover_item_stack_changed()
 
 var held_item_stack_ui: ItemStackUI
+var top_right: Control
+var bottom_right: Control
+var bottom_left: Control
 
 static var held_stack: ItemStack:
 	get:
@@ -21,6 +24,9 @@ func _ready() -> void:
 	singleton = self
 	
 	held_item_stack_ui = $"Held Item Stack"
+	top_right = $"Quadrants/Top Right"
+	bottom_right = $"Quadrants/Bottom Right"
+	bottom_left = $"Quadrants/Bottom Left"
 
 static func show_inventories() -> void:
 	if singleton.visible:
@@ -36,6 +42,9 @@ static func hide_inventories() -> void:
 	
 	singleton.visible = false
 	
+	hover_item_stack = null
+	set_bottom_right(null)
+	
 	if not held_stack.is_empty():
 		Player.singleton.inventory.auto_add(held_stack)
 		if not held_stack.is_empty():
@@ -43,6 +52,22 @@ static func hide_inventories() -> void:
 
 static func toggle_inventories() -> void:
 	hide_inventories() if singleton.visible else show_inventories()
+
+static func set_top_right(control: Control) -> void:
+	_set_quadrant(singleton.top_right, control)
+
+static func set_bottom_right(control: Control) -> void:
+	_set_quadrant(singleton.bottom_right, control)
+
+static func set_bottom_left(control: Control) -> void:
+	_set_quadrant(singleton.bottom_left, control)
+
+static func _set_quadrant(quadrant: Control, child: Control) -> void:
+	if quadrant.get_child_count() > 0:
+		quadrant.remove_child(quadrant.get_child(0))
+	
+	if child:
+		quadrant.add_child(child)
 
 static func _on_hover_item_stack_changed() -> void:
 	if not held_stack.is_empty():

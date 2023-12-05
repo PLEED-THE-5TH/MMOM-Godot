@@ -8,10 +8,8 @@
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_w4wf5"]
 
 [node name="Player" type="CharacterBody3D"]
-collision_mask = 3
+collision_layer = 2
 script = ExtResource("1_q3fc8")
-movement_speed = null
-gravity = null
 
 [node name="Body" type="MeshInstance3D" parent="."]
 mesh = SubResource("CapsuleMesh_0chg3")

@@ -46,8 +46,7 @@ func _handle_inputs() -> void:
 			held_stack.drop()
 	
 	if Input.is_action_just_pressed("Interact"):
-		if InteractableManager.selected_interactable:
-			InteractableManager.selected_interactable.interact()
+		InteractableManager.try_interact()
 	
 	_handle_movement()
 
