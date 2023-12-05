@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://dcq6r27kugnn6"]
+
+[ext_resource type="Script" path="res://Scripts/Interactables/Chest.gd" id="1_1om43"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_fiyvm"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pfg4a"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_6n3vl"]
+radius = 3.0
+
+[node name="Chest" type="RigidBody3D"]
+collision_mask = 3
+script = ExtResource("1_1om43")
+
+[node name="Body" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_fiyvm")
+
+[node name="Hitbox" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_pfg4a")
+
+[node name="Interact Area" type="Area3D" parent="."]
+collision_mask = 2
+
+[node name="Collision Shape" type="CollisionShape3D" parent="Interact Area"]
+shape = SubResource("SphereShape3D_6n3vl")

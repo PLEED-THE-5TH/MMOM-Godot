@@ -1,0 +1,61 @@
+[gd_scene load_steps=5 format=3 uid="uid://chhpuwlrxonpw"]
+
+[ext_resource type="Script" path="res://Scripts/Inventory/UI/InventoryUIManager.gd" id="1_e0wyi"]
+[ext_resource type="PackedScene" uid="uid://bvuiqopa058t6" path="res://Scenes/Templates/Inventory/Item Stack.tscn" id="2_k35nx"]
+[ext_resource type="Script" path="res://Scripts/Inventory/UI/HeldStackUI.gd" id="3_a0vvn"]
+[ext_resource type="PackedScene" uid="uid://kg8iih5pl84q" path="res://Scenes/Templates/Inventory/Player Inventory.tscn" id="4_tg0a1"]
+
+[node name="Inventory UI Manager" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_e0wyi")
+
+[node name="Held Item Stack" parent="." instance=ExtResource("2_k35nx")]
+z_index = 1
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 1
+grow_vertical = 1
+script = ExtResource("3_a0vvn")
+item_stack_ui_size = Vector2(40, 40)
+mouse_offset = Vector2(10, 10)
+
+[node name="Quadrants" type="GridContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 2
+
+[node name="Top Left" type="Control" parent="Quadrants"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Player Inventory" parent="Quadrants/Top Left" instance=ExtResource("4_tg0a1")]
+layout_mode = 1
+
+[node name="Top Right" type="Control" parent="Quadrants"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Bottom Left" type="Control" parent="Quadrants"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Bottom Right" type="Control" parent="Quadrants"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
