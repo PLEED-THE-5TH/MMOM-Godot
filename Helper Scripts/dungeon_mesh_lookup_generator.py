@@ -1,63 +1,73 @@
 import json
 
+
 class Rotations(object):
     @staticmethod
     def _rotate_node_x_90(node):
         outputs = {
-            1:3,
-            2:1,
-            3:4,
-            4:2,
-            5:7,
-            6:5,
-            7:8,
-            8:6
+            1: 3,
+            2: 1,
+            3: 4,
+            4: 2,
+            5: 7,
+            6: 5,
+            7: 8,
+            8: 6
         }
         return outputs[node]
+
     @staticmethod
     def _rotate_node_x_180(node):
         return Rotations._rotate_node_x_90(Rotations._rotate_node_x_90(node))
+
     @staticmethod
     def _rotate_node_x_270(node):
         return Rotations._rotate_node_x_90(Rotations._rotate_node_x_180(node))
+
     @staticmethod
     def _rotate_node_y_90(node):
         outputs = {
-            1:2,
-            2:6,
-            3:4,
-            4:8,
-            5:1,
-            6:5,
-            7:3,
-            8:7
+            1: 2,
+            2: 6,
+            3: 4,
+            4: 8,
+            5: 1,
+            6: 5,
+            7: 3,
+            8: 7
         }
         return outputs[node]
+
     @staticmethod
     def _rotate_node_y_180(node):
         return Rotations._rotate_node_y_90(Rotations._rotate_node_y_90(node))
+
     @staticmethod
     def _rotate_node_y_270(node):
         return Rotations._rotate_node_y_90(Rotations._rotate_node_y_180(node))
+
     @staticmethod
     def _rotate_node_z_90(node):
         outputs = {
-            1:5,
-            2:6,
-            3:1,
-            4:2,
-            5:7,
-            6:8,
-            7:3,
-            8:4
+            1: 5,
+            2: 6,
+            3: 1,
+            4: 2,
+            5: 7,
+            6: 8,
+            7: 3,
+            8: 4
         }
         return outputs[node]
+
     @staticmethod
     def _rotate_node_z_180(node):
         return Rotations._rotate_node_z_90(Rotations._rotate_node_z_90(node))
+
     @staticmethod
     def _rotate_node_z_270(node):
         return Rotations._rotate_node_z_90(Rotations._rotate_node_z_180(node))
+
     @staticmethod
     def _rotate_node(node, x, y, z):
         new_node = node
@@ -83,6 +93,7 @@ class Rotations(object):
             case 270:
                 new_node = Rotations._rotate_node_z_270(new_node)
         return new_node
+
     @staticmethod
     def rotate_nodes(nodes, x, y, z):
         new_nodes = []
@@ -90,6 +101,7 @@ class Rotations(object):
             new_nodes.append(Rotations._rotate_node(node, x, y, z))
         new_nodes.sort()
         return new_nodes
+
 
 def get_variant_data(variant_nodes):
     data = {}
@@ -102,7 +114,7 @@ def get_variant_data(variant_nodes):
                     key += 1 << (b - 1)
                 if not key in data:
                     data[key] = {
-                        #"nodes": rotated_nodes,
+                        # "nodes": rotated_nodes,
                         "rotation": (x, y, z)
                     }
     return data
@@ -116,6 +128,7 @@ def get_variant_data(variant_nodes):
 #   | :            | |
 #   |1:............|.|5
 #  2|/_____________|/6
+
 
 variants = [
     [],
@@ -134,6 +147,11 @@ variants = [
     [2, 4, 5, 7],
     [1, 2, 5, 7]
 ]
+
+inverted_variants = [list(set(range(1, 9)) - set(v))
+                     for v in variants]
+
+print(inverted_variants)
 
 full_data = {}
 for i, variant_nodes in enumerate(variants):

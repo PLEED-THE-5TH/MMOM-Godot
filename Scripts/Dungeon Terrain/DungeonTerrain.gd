@@ -18,9 +18,9 @@ func _init_chunks(x_chunks: int, y_chunks: int, z_chunks: int) -> void:
 		chunks.append(slice)
 
 func _init_meshes(x_chunks: int, y_chunks: int, z_chunks: int) -> void:
-	var width: int = x_chunks * DungeonChunk.size.x
-	var height: int = y_chunks * DungeonChunk.size.y
-	var depth: int = z_chunks * DungeonChunk.size.z
+	var width: int = (x_chunks * DungeonChunk.size.x) - 1
+	var height: int = (y_chunks * DungeonChunk.size.y) - 1
+	var depth: int = (z_chunks * DungeonChunk.size.z) - 1
 	for x in range(width):
 		var slice: Array = []
 		for y in range(height):
@@ -30,21 +30,40 @@ func _init_meshes(x_chunks: int, y_chunks: int, z_chunks: int) -> void:
 			slice.append(row)
 		meshes.append(slice)
 
-func get_chunk_from_grid_location(grid_location: Vector3i) -> DungeonChunk:
-	@warning_ignore("integer_division")
-	return chunks[
-		grid_location.x / DungeonChunk.size.x
-	][
-		grid_location.y / DungeonChunk.size.y
-	][
-		grid_location.z / DungeonChunk.size.z
-	]
+func _is_valid_coord(coord: int, limit: int) -> bool:
+	return 0 <= coord and coord < limit
 
-func get_cell_from_grid_location(grid_location: Vector3i) -> DungeonCell:
-	return get_chunk_from_grid_location(grid_location).cells[
-		grid_location.x % DungeonChunk.size.x
-	][
-		grid_location.y % DungeonChunk.size.y
-	][
-		grid_location.z % DungeonChunk.size.z
-	]
+func get_total_cells() -> Vector3i:
+	return Vector3i(
+		chunks.size() * DungeonChunk.size.x,
+		chunks[0].size() * DungeonChunk.size.y,
+		chunks[0][0].size() * DungeonChunk.size.z,
+	)
+
+func is_valid_x_coord(x_coord: int) -> bool:
+	return _is_valid_coord(x_coord, chunks.size() * DungeonChunk.size.x)
+func is_valid_y_coord(y_coord: int) -> bool:
+	return _is_valid_coord(y_coord, chunks[0].size() * DungeonChunk.size.y)
+func is_valid_z_coord(z_coord: int) -> bool:
+	return _is_valid_coord(z_coord, chunks[0][0].size() * DungeonChunk.size.z)
+
+func is_valid_grid_location(grid_location: Vector3i) -> bool:
+	return (
+		is_valid_x_coord(grid_location.x) and
+		is_valid_y_coord(grid_location.y) and
+		is_valid_z_coord(grid_location.z)
+	)
+
+func get_chunk_at(grid_location: Vector3i) -> DungeonChunk:
+	if not is_valid_grid_location(grid_location):
+		return null
+	
+	@warning_ignore("integer_division")
+	return Helper.get_3d_array_value(grid_location / DungeonChunk.size, chunks)
+
+func get_cell_at(grid_location: Vector3i) -> DungeonCell:
+	var chunk = get_chunk_at(grid_location)
+	if not chunk:
+		return null
+	
+	return Helper.get_3d_array_value(grid_location % DungeonChunk.size, chunk.cells)

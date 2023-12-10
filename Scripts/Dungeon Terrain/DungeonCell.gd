@@ -6,7 +6,7 @@ var chunk: DungeonChunk
 var grid_location: Vector3i
 
 # this can be changed in the future
-var contents = "air":
+var contents = "not air":
 	get:
 		return contents
 	set(new_contents):

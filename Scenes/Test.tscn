@@ -1,11 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://4yue8105ia4m"]
+[gd_scene load_steps=9 format=3 uid="uid://4yue8105ia4m"]
 
 [ext_resource type="PackedScene" uid="uid://chhpuwlrxonpw" path="res://Scenes/Templates/Inventory/Inventory UI Manager.tscn" id="1_13hfx"]
 [ext_resource type="PackedScene" uid="uid://7xcumaunp6y1" path="res://Scenes/Templates/Player.tscn" id="2_3ofo6"]
 [ext_resource type="PackedScene" uid="uid://dytesdpuh37g5" path="res://Scenes/Templates/Interactable Manager.tscn" id="2_11xd5"]
 [ext_resource type="Script" path="res://Scripts/ItemStackDropManager.gd" id="3_pc8gj"]
-[ext_resource type="PackedScene" uid="uid://dcq6r27kugnn6" path="res://Scenes/Templates/Chest/Chest.tscn" id="4_cm6dg"]
-[ext_resource type="Script" path="res://Scripts/Dungeon Terrain/DungeonGenerator.gd" id="4_rw72k"]
+[ext_resource type="Script" path="res://Scripts/Dungeon Terrain/DungeonTerrainManager.gd" id="4_orf15"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_mt4g6"]
 size = Vector3(1, 0, 1)
@@ -41,17 +40,17 @@ layout_mode = 1
 [node name="Item Stack Drops" type="Node" parent="."]
 script = ExtResource("3_pc8gj")
 
-[node name="Dungeon Generator" type="Node3D" parent="."]
-script = ExtResource("4_rw72k")
+[node name="Dungeon Terrain Manager" type="Node3D" parent="."]
+script = ExtResource("4_orf15")
 
 [node name="Directional Light" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.984808, -0.133022, -0.111619, 0, -0.642788, 0.766045, -0.173648, -0.754407, -0.633022, 0, 0, 0)
 
 [node name="Player" parent="." instance=ExtResource("2_3ofo6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48.4256, 1, 48.0283)
 
 [node name="Ground" type="Node3D" parent="."]
-transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
+transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 50, 0, 50)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Ground"]
 collision_mask = 0
@@ -61,18 +60,3 @@ shape = SubResource("BoxShape3D_mt4g6")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
 mesh = SubResource("PlaneMesh_iggrk")
-
-[node name="Ground2" type="Node3D" parent="."]
-transform = Transform3D(20, 0, 0, 0, -8.74228e-07, -20, 0, 20, -8.74228e-07, 4.02977, 0, -6.02416)
-
-[node name="StaticBody3D" type="StaticBody3D" parent="Ground2"]
-collision_mask = 0
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground2/StaticBody3D"]
-shape = SubResource("BoxShape3D_mt4g6")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground2"]
-mesh = SubResource("PlaneMesh_iggrk")
-
-[node name="Chest" parent="." instance=ExtResource("4_cm6dg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 1, -7)
