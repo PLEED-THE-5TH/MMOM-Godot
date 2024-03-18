@@ -9,7 +9,7 @@ class_name Player
 @export var gravity: float = -1
 
 static var singleton: Player
-		
+
 var inventory: Inventory
 
 func _ready() -> void:
